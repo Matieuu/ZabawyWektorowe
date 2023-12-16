@@ -1,0 +1,16 @@
+plugins {
+    id 'java'
+}
+
+group = 'com.motorola'
+version = ''
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+}
+
+test {
+}
