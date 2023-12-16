@@ -3,7 +3,15 @@ package com.motorola.inputs;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+/**
+ * Klasa obsługująca wejścia dla klawiatury
+ */
 public class KeyboardInputs implements KeyListener {
+
+    /**
+     * Konstruktor
+     */
+    public KeyboardInputs() {}
 
     /**
      * Wywoływana w przypadku wciśnięcia klawisza na klawiaturze

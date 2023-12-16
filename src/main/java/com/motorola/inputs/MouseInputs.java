@@ -3,7 +3,15 @@ package com.motorola.inputs;
 import javax.swing.event.MouseInputListener;
 import java.awt.event.*;
 
+/**
+ * Klasa obsługujące wejścia dla myszy
+ */
 public class MouseInputs implements MouseInputListener, MouseWheelListener {
+
+    /**
+     * Konstruktor
+     */
+    public MouseInputs() {}
 
     /**
      * Wywoływana w przypadku wciśnięcia przycisku

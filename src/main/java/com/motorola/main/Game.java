@@ -2,12 +2,27 @@ package com.motorola.main;
 
 import java.awt.*;
 
+/**
+ * Klasa gry
+ */
 public class Game implements Runnable {
 
-    public static final int WINDOW_WIDTH = 1600;
-    public static final int WINDOW_HEIGHT = 900;
+    /**
+     * Szerokość okna
+     */
+    public int windowWidth = 1600;
+    /**
+     * Wysokość okna
+     */
+    public int windowHeight = 900;
 
+    /**
+     * Limit FPS
+     */
     public static final int FPS_SET = 120;
+    /**
+     * Limit UPS
+     */
     public static final int UPS_SET = 240;
 
     private GameWindow gameWindow;
@@ -16,10 +31,10 @@ public class Game implements Runnable {
 
     private boolean run = true;
 
-    // Konstruktor
+    /**
+     * Konstruktor
+     */
     public Game() {
-        initClass();
-
         // Inicjalizacja okna aplikacji
         gamePanel = new GamePanel(this);
         gameWindow = new GameWindow(gamePanel);
@@ -31,12 +46,6 @@ public class Game implements Runnable {
         // Start game loop
         gameThread = new Thread(this);
         gameThread.start();
-    }
-
-    /**
-     * Inicjalizacja klas potrzebnych do działania projektu
-     */
-    private void initClass() {
     }
 
     /**
@@ -52,12 +61,6 @@ public class Game implements Runnable {
      * @param g Obiekt umożliwiający rysowanie na ekranie (domyślnie: Graphics)
      */
     public void render(Graphics g) {
-    }
-
-    /**
-     * Metoda wywoływana po przerwaniu game loopa
-     */
-    public void dispose() {
     }
 
     @Override

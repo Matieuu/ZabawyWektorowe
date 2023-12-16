@@ -4,9 +4,15 @@ import javax.swing.*;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowFocusListener;
 
+/**
+ * Klasa okienka
+ */
 public class GameWindow extends JFrame {
 
-    // Konstruktor
+    /**
+     * Konstruktor Okna
+     * @param gamePanel Instancja panelu gry
+     */
     public GameWindow(GamePanel gamePanel) {
         this.add(gamePanel);
         this.pack();
