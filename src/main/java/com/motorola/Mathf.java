@@ -11,13 +11,12 @@ public class Mathf {
      * Pole random dla użytku w klasie
      */
     private static Random rand = new Random();
+    private static float accuracy = 0.000001f;
 
     /**
      * Liczba PI
      */
     public static final float PI = 3.141592653589793238462643383279502884197169399375105820974944592307816406286208998628034825342117067982148086513282306647093844609550582231725359408128481117450284102701938521105559644622948954930381964428f;
-
-    public static final float EPSILON = (float) 1.0e-10;
 
     /**
      * Konstruktor
@@ -31,6 +30,35 @@ public class Mathf {
         final float threehalfs = 1.5f
     }
     */
+
+    /**
+     * Potęgowanie
+     * @param x podstawa
+     * @param n wykładnik
+     * @return wynik
+     */
+    public static float pow(float x, int n) {
+        float result = 1;
+        for (int i = 0; i < n; i++)
+            result *= x;
+        return result;
+    }
+
+    /**
+     * Pierwiastkowanie
+     * @param x podstawa
+     * @param n wykładnik
+     * @return wynik
+     */
+    public static float sqrt(float x, int n) {
+        float xk = x / n;
+        float xkPlusOne = (1.0f / n) * ((n - 1) * xk + x / (float) Math.pow(xk, n - 1));
+        while (Math.abs(xkPlusOne - xk) >= accuracy) {
+            xk = xkPlusOne;
+            xkPlusOne = (1.0f / n) * ((n - 1) * xk + x / (float) Math.pow(xk, n - 1));
+        }
+        return xkPlusOne;
+    }
 
     /**
      * Klasa do liczenia wartości absolutnej liczby
