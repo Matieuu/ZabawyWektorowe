@@ -1,6 +1,7 @@
-package com.motorola.main;
+package com.motorola.engine;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 /**
  * Klasa gry
@@ -29,7 +30,8 @@ public class Game implements Runnable {
     private GamePanel gamePanel;
     private Thread gameThread;
 
-    private boolean run = true;
+    private ArrayList<GameObject> objects;
+    private ArrayList<GameSystem> gameSystems;
 
     /**
      * Konstruktor
@@ -53,6 +55,7 @@ public class Game implements Runnable {
      * Jej cel to aktualizowanie logiki gry
      */
     public void update() {
+
     }
 
     /**
@@ -102,6 +105,14 @@ public class Game implements Runnable {
                 frames = 0;
                 updates = 0;
             }
+        }
+    }
+
+    public static class Component {
+        public String id;
+
+        public Component(String id) {
+            this.id = id;
         }
     }
 }

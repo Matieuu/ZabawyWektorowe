@@ -1,4 +1,4 @@
-package com.motorola.inputs;
+package com.motorola.engine.inputs;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;

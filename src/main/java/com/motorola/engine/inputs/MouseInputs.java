@@ -1,4 +1,4 @@
-package com.motorola.inputs;
+package com.motorola.engine.inputs;
 
 import javax.swing.event.MouseInputListener;
 import java.awt.event.*;

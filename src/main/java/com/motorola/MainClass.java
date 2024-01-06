@@ -1,6 +1,6 @@
 package com.motorola;
 
-import com.motorola.main.Game;
+import com.motorola.engine.Game;
 
 /**
  * Klasa główna
@@ -17,6 +17,9 @@ public class MainClass {
      * @param args Argumety, które obecnie nie są obsługiwane
      */
     public static void main(String[] args) {
+
+
         Game game = new Game();
+
     }
 }

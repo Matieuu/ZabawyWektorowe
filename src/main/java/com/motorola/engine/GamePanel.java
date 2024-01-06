@@ -1,6 +1,6 @@
-package com.motorola.main;
+package com.motorola.engine;
 
-import com.motorola.inputs.KeyboardInputs;
+import com.motorola.engine.inputs.KeyboardInputs;
 
 import javax.swing.*;
 import java.awt.*;
@@ -37,5 +37,9 @@ public class GamePanel extends JPanel {
      */
     public Game getGame() {
         return game;
+    }
+
+    public static interface ECSystem {
+        public void update();
     }
 }
