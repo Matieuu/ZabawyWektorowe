@@ -7,21 +7,19 @@ import java.util.Iterator;
 
 */
 public abstract class GameSystem {
-
     protected Game mygame;
     protected ArrayList<GameObject> usedObjects;
-    protected ArrayList<String> activeAddObjects;
+    private ArrayList<String> activeAddObjects;
 
     /**
      * Konstructor for Gamesystem
      * @param mygame
      */
-    GameSystem(Game mygame){
+    public GameSystem(Game mygame){
         this.activeAddObjects = new ArrayList<>();
         this.mygame = mygame;
         mygame.addGameSystem(this);
     }
-
     /**
      * It add GameObjects with the same name to System
      * if you add a star before name it will before every iteration
@@ -66,20 +64,19 @@ public abstract class GameSystem {
                 iteratorG.remove();
             }
         }
-
     }
     /**
      * Function active search for GameObjects with active search name that can add to system
      */
     public void activeSearchForGameObjects(){
-        //
+        //stillnotimplemented
     }
     /**
      * You have to defie what values object need for working with system
      */
-    abstract void addToGameObjectValues(GameObject gameObject);
+    public abstract void addToGameObjectValues(GameObject gameObject);
     /**
      * Updating Funciton form Game
      */
-    abstract void update();
+    public abstract void update();
 }

@@ -8,9 +8,9 @@ import java.util.Map;
  */
 public class GameObject {
     protected Game mygame;
-    protected String name;
-    protected String keyname;
-    protected Map<String, Object> dane;
+    private String name;
+    private String keyname;
+    private Map<String, Object> dane;
     public GameObject(Game mygame,String name){
         this.dane = new HashMap<>();
         this.name = name;
@@ -18,7 +18,6 @@ public class GameObject {
         keyname = mygame.genKeyName(this.name);
         mygame.addGameObject(this);
     }
-
     public Object getValue(String valueName){
         try {
             if (dane.containsKey(valueName)) {
@@ -31,9 +30,10 @@ public class GameObject {
         }
         return null;
     }
-    public void addValue(String valueName,Object ofValue){
+    public void addValue(String valueName, Object ofValue){
         dane.put(valueName,ofValue);
     }
     public String getKeyName(){return keyname;}
     public String getName(){return name;}
+    public Game getGame(){return mygame;}
 }
