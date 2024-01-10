@@ -17,7 +17,6 @@ public class Game implements Runnable {
      * Wysokość okna
      */
     public int windowHeight = 900;
-
     /**
      * Limit FPS
      */
@@ -38,13 +37,12 @@ public class Game implements Runnable {
      * Konstruktor
      */
     public Game() {
-        // Inicjalizacja okna aplikacji
-        gamePanel = new GamePanel(this);
-        gameWindow = new GameWindow(gamePanel);
-
         gameWindow.setVisible(true);
         gamePanel.setFocusable(true);
         gamePanel.requestFocus();
+        //Inicialization Arrays
+        gameSystems = new ArrayList<GameSystem>();
+        gameObjects = new HashMap<String,GameObject>();
 
         // Start game loop
         gameThread = new Thread(this);
@@ -94,6 +92,24 @@ public class Game implements Runnable {
         }
         return null;
     }
+    /**
+     * Function remove a game object from gameObject array and sub arrays in gameSystem by keyname
+     * @param keyName
+     */
+    public void removeGameObject(String keyName) {
+        try {
+            if (gameObjects.containsKey(keyName)) {
+                for(GameSystem gameSystem: gameSystems){
+                    gameSystem.removeObjectByKeyName(keyName);
+                }
+                gameObjects.remove(keyName);
+            } else {
+                throw new IllegalArgumentException("Does not exist a GameObect with that keyname" + keyName);
+            }
+        } catch (IllegalArgumentException e) {
+            System.out.println("Błąd: " + e.getMessage());
+        }
+    }
 
     /**
      * Function fings GameObjects with name and return a arraylist of its;
@@ -114,8 +130,11 @@ public class Game implements Runnable {
      * Wywoływana Const.UPS_SET razy na sekundę
      * Jej cel to aktualizowanie logiki gry
      */
-    public void update() {
-
+    private void update() {
+        for (GameSystem system : gameSystems) {
+            system.activeSearchForGameObjects();
+            system.update();
+        }
     }
 
     /**
@@ -148,7 +167,7 @@ public class Game implements Runnable {
             previousTime = currentTime;
 
             if (deltaU >= 1) {
-                update();
+                this.update();
                 updates++;
                 deltaU--;
             }

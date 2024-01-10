@@ -3,8 +3,8 @@ package com.motorola.engine;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-/*
-
+/**
+ *  GameSystem
 */
 public abstract class GameSystem {
     protected Game mygame;
@@ -28,22 +28,19 @@ public abstract class GameSystem {
      */
     public void addObjectByName(String name){
         if(name.charAt(0) == '*'){
-            Iterator<GameObject> iteratorG = usedObjects.iterator();
-            while (iteratorG.hasNext()) {
-                GameObject gameObject = iteratorG.next();
-                if (gameObject.getName().equals(name)) {
-                    iteratorG.remove();
-                }
-            }
+            String justName = name.substring(1);
+            usedObjects.addAll(mygame.getObjectsByName(justName));
         }else {
-            Iterator<GameObject> iteratorG = usedObjects.iterator();
-            while (iteratorG.hasNext()) {
-                GameObject gameObject = iteratorG.next();
-                if (gameObject.getName().equals(name)) {
-                    iteratorG.remove();
-                }
-            }
+            usedObjects.addAll(mygame.getObjectsByName(name));
         }
+    }
+    /**
+     * It add GameObjects with the same keyname to System
+     * @param keyname
+     */
+    public void addObjectByKeyName(String keyname){
+
+        usedObjects.add(mygame.getObjectByKey(keyname));
     }
     /**
      * It will remove GameObjects with that name from System and activeSearch
@@ -66,10 +63,25 @@ public abstract class GameSystem {
         }
     }
     /**
+     * It will remove GameObjects with that keyname from System
+     * @param keyname
+     */
+    public void removeObjectByKeyName(String keyname){
+        Iterator<GameObject> iterator = usedObjects.iterator();
+        while (iterator.hasNext()) {
+            GameObject obj = iterator.next();
+            if (obj.getKeyName().equals(keyname)) {
+                iterator.remove();
+            }
+        }
+    }
+    /**
      * Function active search for GameObjects with active search name that can add to system
      */
     public void activeSearchForGameObjects(){
-        //stillnotimplemented
+        for(String name :activeAddObjects){
+            addObjectByName(name);
+        }
     }
     /**
      * You have to defie what values object need for working with system

@@ -3,13 +3,22 @@ package com.motorola.engine;
 import java.util.HashMap;
 import java.util.Map;
 
-/*
-    GameObject
+/**
+ *  GameObject
  */
 public class GameObject {
     protected Game mygame;
+    /**
+     * Nazwa obiektu ma przectawiać jego typ w grze
+     */
     private String name;
+    /**
+     * Nazwa klucz do tablicy obiektów
+     */
     private String keyname;
+    /**
+     * Hash mapa pozwala na dodanie klucza(Srring) i Wartości(Jaki kolniek Obiekt który castujemy do naszego w przypadku nieprawidłowego castowania powinien! wyrzucić błąd)
+     */
     private Map<String, Object> dane;
     public GameObject(Game mygame,String name){
         this.dane = new HashMap<>();
@@ -36,4 +45,10 @@ public class GameObject {
     public String getKeyName(){return keyname;}
     public String getName(){return name;}
     public Game getGame(){return mygame;}
+    /**
+     * Function deletes object from all arrays
+     */
+    public void destroy(){
+        mygame.removeGameObject(keyname);
+    }
 }
