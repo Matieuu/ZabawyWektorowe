@@ -17,9 +17,6 @@ public class MainClass {
      * @param args Argumety, które obecnie nie są obsługiwane
      */
     public static void main(String[] args) {
-
-
         Game game = new Game();
-
     }
 }

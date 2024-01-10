@@ -1,5 +1,6 @@
 package com.motorola.engine;
 
+import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7,7 +8,7 @@ import java.util.HashMap;
 /**
  * Klasa gry
  */
-public class Game implements Runnable {
+public class Game extends JFrame implements Runnable {
 
     /**
      * Szerokość okna
@@ -25,11 +26,7 @@ public class Game implements Runnable {
      * Limit UPS
      */
     public static final int UPS_SET = 240;
-
-    private GameWindow gameWindow;
-    private GamePanel gamePanel;
     private Thread gameThread;
-
     private HashMap<String,GameObject> gameObjects;
     private ArrayList<GameSystem> gameSystems;
 
@@ -37,9 +34,6 @@ public class Game implements Runnable {
      * Konstruktor
      */
     public Game() {
-        gameWindow.setVisible(true);
-        gamePanel.setFocusable(true);
-        gamePanel.requestFocus();
         //Inicialization Arrays
         gameSystems = new ArrayList<GameSystem>();
         gameObjects = new HashMap<String,GameObject>();
@@ -47,6 +41,19 @@ public class Game implements Runnable {
         // Start game loop
         gameThread = new Thread(this);
         gameThread.start();
+
+        //Inicialization Window
+        this.pack();
+        this.setResizable(false);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setLocationRelativeTo(null);
+
+        this.setSize(this.windowWidth,this.windowHeight);
+        this.setPreferredSize(new Dimension(this.windowWidth, this.windowHeight));
+
+        this.setVisible(true);
+        this.setFocusable(true);
+        this.requestFocus();
     }
 
     /**
@@ -137,12 +144,11 @@ public class Game implements Runnable {
         }
     }
 
-    /**
-     * Wywoływana Const.FPS_SET razy na sekundę
-     * Jej cel to renderowanie gry w GamePanel
-     * @param g Obiekt umożliwiający rysowanie na ekranie (domyślnie: Graphics)
-     */
-    public void render(Graphics g) {
+    @Override
+    public void paint(Graphics g){
+        super.paint(g);
+
+        //brak implementacjie funkcji rysującej linie które
     }
 
     @Override
@@ -173,7 +179,7 @@ public class Game implements Runnable {
             }
 
             if (deltaF >= 1) {
-                gamePanel.repaint();
+                this.repaint();
                 frames++;
                 deltaF--;
             }
