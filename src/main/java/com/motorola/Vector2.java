@@ -5,7 +5,7 @@ package com.motorola;
  */
 public class Vector2 {
 
-    private float x, y;
+    public float x, y;
 
     /**
      * Konstruktor
