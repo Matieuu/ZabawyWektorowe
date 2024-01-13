@@ -1,6 +1,7 @@
 package com.motorola.engine;
 
 import com.motorola.Line2D;
+import com.motorola.Mathf;
 import com.motorola.Vector2;
 
 import javax.swing.*;
@@ -69,7 +70,7 @@ public class Game extends JFrame implements Runnable {
      */
     public void addGameObject(GameObject gameObject){
         if(gameObjects.containsKey(gameObject.getKeyName())){
-            //error? //or add clone
+            //add clone
         }
         else {
             gameObjects.put(gameObject.getKeyName(),gameObject);
@@ -103,6 +104,7 @@ public class Game extends JFrame implements Runnable {
     /**
      * Function remove a game object from gameObject array and sub arrays in gameSystem by keyname
      * @param keyName
+     * //nie potrzebne?
      */
     public void removeGameObject(String keyName) {
         try {
@@ -115,7 +117,8 @@ public class Game extends JFrame implements Runnable {
                 throw new IllegalArgumentException("Does not exist a GameObect with that keyname" + keyName);
             }
         } catch (IllegalArgumentException e) {
-            System.out.println("Error: " + e.getMessage());
+            System.out.println("Critical Error: " + e.getMessage());
+            System.exit(1);
         }
     }
 
@@ -133,7 +136,12 @@ public class Game extends JFrame implements Runnable {
         }
         return subGameObjects;
     };
-
+    /**
+     * Function adds to quente line to draw
+     */
+    public void drawLine2D(Vector2 start,Vector2 end,Color color){
+        gameRender.add(new Line2D(start,end,color));
+    }
     /**
      * Function adds to quente line to draw
      */
@@ -162,13 +170,13 @@ public class Game extends JFrame implements Runnable {
 
     @Override
     public void run() {
-        double timePerFrame = Math.pow(10, 9) / FPS_SET;
+        float timePerFrame = Mathf.pow(10, 9) / FPS_SET;
 
         long previousTime = System.nanoTime();
         long lastCheck = System.currentTimeMillis();
 
         int frames = 0;
-        double deltaF = 0;
+        float deltaF = 0;
 
         while (true) {
             long currentTime = System.nanoTime();

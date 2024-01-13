@@ -8,7 +8,10 @@ public class Examplegame {
         Game Examplegame = new Game();
         ExampleSystem Examplesys = new ExampleSystem(Examplegame);
 
-        GameObject player = new GameObject(Examplegame,"Player");
+        new GameObject(Examplegame,"Player");
+        new GameObject(Examplegame,"Object");
+
+        //Examplegame.removeGameObject();
 
         Examplesys.addObjectByName("Player");
 

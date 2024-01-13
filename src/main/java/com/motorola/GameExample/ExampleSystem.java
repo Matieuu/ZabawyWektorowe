@@ -1,6 +1,8 @@
 package com.motorola.GameExample;
 
 import java.awt.*;
+import java.util.Random;
+
 import com.motorola.Line2D;
 import com.motorola.Vector2;
 import com.motorola.engine.Game;
@@ -20,8 +22,8 @@ public class ExampleSystem extends GameSystem {
     }
     @Override
     public void update(){
-        for(GameObject obiect :usedObjects){
-            Vector2 position = (Vector2) obiect.getValue("position");
+        for(GameObject object :usedObjects){
+            Vector2 position = (Vector2) object.getValue("position");
             Vector2 position2 = new Vector2(position.getX()+10,position.getX()+10);
             position.x += 1;
             position.y += 2;

@@ -73,6 +73,7 @@ public abstract class GameSystem {
     /**
      * It will remove GameObjects with that keyname from System
      * @param keyname
+     * //przekomplikowana
      */
     public void removeObjectByKeyName(String keyname){
         Iterator<GameObject> iterator = usedObjects.iterator();
@@ -85,6 +86,7 @@ public abstract class GameSystem {
     }
     /**
      * Function active search for GameObjects with active search name that can add to system
+     * //upewnić czy nie ma błędów
      */
     public void activeSearchForGameObjects(){
         for(String name :activeAddObjects){
