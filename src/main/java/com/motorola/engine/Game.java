@@ -1,5 +1,8 @@
 package com.motorola.engine;
 
+import com.motorola.Line2D;
+import com.motorola.Vector2;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
@@ -21,14 +24,11 @@ public class Game extends JFrame implements Runnable {
     /**
      * Limit FPS
      */
-    public static final int FPS_SET = 120;
-    /**
-     * Limit UPS
-     */
-    public static final int UPS_SET = 240;
+    public static final int FPS_SET = 60;
     private Thread gameThread;
     private HashMap<String,GameObject> gameObjects;
     private ArrayList<GameSystem> gameSystems;
+    private ArrayList<Line2D> gameRender;
 
     /**
      * Konstruktor
@@ -37,6 +37,7 @@ public class Game extends JFrame implements Runnable {
         //Inicialization Arrays
         gameSystems = new ArrayList<GameSystem>();
         gameObjects = new HashMap<String,GameObject>();
+        gameRender = new ArrayList<Line2D>();
 
         // Start game loop
         gameThread = new Thread(this);
@@ -114,7 +115,7 @@ public class Game extends JFrame implements Runnable {
                 throw new IllegalArgumentException("Does not exist a GameObect with that keyname" + keyName);
             }
         } catch (IllegalArgumentException e) {
-            System.out.println("Błąd: " + e.getMessage());
+            System.out.println("Error: " + e.getMessage());
         }
     }
 
@@ -134,8 +135,14 @@ public class Game extends JFrame implements Runnable {
     };
 
     /**
+     * Function adds to quente line to draw
+     */
+    public void drawLine2D(Line2D line){
+        gameRender.add(line);
+    }
+    /**
      * Wywoływana Const.UPS_SET razy na sekundę
-     * Jej cel to aktualizowanie logiki gry
+     * Jej cel to aktualizowanie gry
      */
     private void update() {
         for (GameSystem system : gameSystems) {
@@ -143,52 +150,44 @@ public class Game extends JFrame implements Runnable {
             system.update();
         }
     }
-
     @Override
     public void paint(Graphics g){
         super.paint(g);
-
-        //brak implementacjie funkcji rysującej linie które
+        for(Line2D line: gameRender) {
+            g.setColor(line.color);
+            g.drawLine((int) line.start.getX(), (int) line.start.getY(), (int) line.end.getX(), (int) line.end.getY());
+        }
+        gameRender.clear();
     }
 
     @Override
     public void run() {
         double timePerFrame = Math.pow(10, 9) / FPS_SET;
-        double timePerUpdate = Math.pow(10, 9) / UPS_SET;
 
         long previousTime = System.nanoTime();
         long lastCheck = System.currentTimeMillis();
 
         int frames = 0;
-        int updates = 0;
-
-        double deltaU = 0;
         double deltaF = 0;
 
         while (true) {
             long currentTime = System.nanoTime();
 
-            deltaU += (currentTime - previousTime) / timePerUpdate;
             deltaF += (currentTime - previousTime) / timePerFrame;
             previousTime = currentTime;
 
-            if (deltaU >= 1) {
-                this.update();
-                updates++;
-                deltaU--;
-            }
 
             if (deltaF >= 1) {
-                this.repaint();
+                update();
+                repaint();
                 frames++;
                 deltaF--;
             }
 
             if (System.currentTimeMillis() - lastCheck >= 1000) {
                 lastCheck = System.currentTimeMillis();
-                System.out.println("FPS: " + frames + " | UPS: " + updates);
+                System.out.println("FPS: " + frames);
                 frames = 0;
-                updates = 0;
             }
         }
     }

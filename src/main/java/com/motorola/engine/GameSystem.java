@@ -13,11 +13,12 @@ public abstract class GameSystem {
 
     /**
      * Konstructor for Gamesystem
-     * @param mygame
+     * @param mygame_
      */
-    public GameSystem(Game mygame){
-        this.activeAddObjects = new ArrayList<>();
-        this.mygame = mygame;
+    public GameSystem(Game mygame_){
+        usedObjects = new ArrayList<GameObject>();
+        activeAddObjects = new ArrayList<>();
+        mygame = mygame_;
         mygame.addGameSystem(this);
     }
     /**
@@ -27,11 +28,17 @@ public abstract class GameSystem {
      * @param name
      */
     public void addObjectByName(String name){
+        ArrayList<GameObject> objectsByName;
         if(name.charAt(0) == '*'){
             String justName = name.substring(1);
-            usedObjects.addAll(mygame.getObjectsByName(justName));
+            activeAddObjects.add(justName);
+            objectsByName = mygame.getObjectsByName(justName);
         }else {
-            usedObjects.addAll(mygame.getObjectsByName(name));
+            objectsByName = mygame.getObjectsByName(name);
+        }
+        usedObjects.addAll(objectsByName);
+        for(GameObject gameObject : objectsByName){
+            addToGameObjectValues(gameObject);
         }
     }
     /**
@@ -39,8 +46,9 @@ public abstract class GameSystem {
      * @param keyname
      */
     public void addObjectByKeyName(String keyname){
-
-        usedObjects.add(mygame.getObjectByKey(keyname));
+        GameObject objectByKey = mygame.getObjectByKey(keyname);
+        addToGameObjectValues(objectByKey);
+        usedObjects.add(objectByKey);
     }
     /**
      * It will remove GameObjects with that name from System and activeSearch

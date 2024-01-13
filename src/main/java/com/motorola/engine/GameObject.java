@@ -1,5 +1,7 @@
 package com.motorola.engine;
 
+import com.motorola.Vector2;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,6 +29,13 @@ public class GameObject {
         keyname = mygame.genKeyName(this.name);
         mygame.addGameObject(this);
     }
+
+    /**
+     * Function returns value of information with valueName
+     * @param valueName
+     * @return Objecct
+     */
+
     public Object getValue(String valueName){
         try {
             if (dane.containsKey(valueName)) {
@@ -35,7 +44,8 @@ public class GameObject {
                 throw new IllegalArgumentException("KeyValue '" + valueName + "' does not exist in GameObect" + name + " With " + keyname);
             }
         } catch (IllegalArgumentException e) {
-            System.out.println("Błąd: " + e.getMessage());
+            System.out.println("Critical Error: " + e.getMessage());
+            System.exit(1);
         }
         return null;
     }
