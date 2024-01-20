@@ -12,8 +12,6 @@ public class KeyboardControler extends GameSystem implements KeyListener {
     private String RelasedKeys;
     public KeyboardControler(Game mygame){
         super(mygame);
-        //adding this object as KeyLisener
-        mygame.addKeyListener(this);
     }
 
     /**

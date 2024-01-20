@@ -1,10 +1,8 @@
 package com.motorola.engine;
 
 import com.motorola.Line2D;
-import com.motorola.Mathf;
 import com.motorola.Vector2;
 
-import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,20 +10,9 @@ import java.util.HashMap;
 /**
  * Klasa gry
  */
-public class Game extends JFrame implements Runnable {
-
-    /**
-     * Szerokość okna
-     */
-    public int windowWidth = 1600;
-    /**
-     * Wysokość okna
-     */
-    public int windowHeight = 900;
-    /**
-     * Limit FPS
-     */
+public class Game implements Runnable {
     public static final int FPS_SET = 60;
+    private GamePanel mypanel;
     private Thread gameThread;
     private HashMap<String,GameObject> gameObjects;
     private ArrayList<GameSystem> gameSystems;
@@ -34,7 +21,9 @@ public class Game extends JFrame implements Runnable {
     /**
      * Konstruktor
      */
-    public Game() {
+    public Game(String title) {
+        mypanel = new GamePanel(this);
+
         //Inicialization Arrays
         gameSystems = new ArrayList<GameSystem>();
         gameObjects = new HashMap<String,GameObject>();
@@ -45,17 +34,7 @@ public class Game extends JFrame implements Runnable {
         gameThread.start();
 
         //Inicialization Window
-        this.pack();
-        this.setResizable(false);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setLocationRelativeTo(null);
 
-        this.setSize(this.windowWidth,this.windowHeight);
-        this.setPreferredSize(new Dimension(this.windowWidth, this.windowHeight));
-
-        this.setVisible(true);
-        this.setFocusable(true);
-        this.requestFocus();
     }
 
     /**
@@ -158,9 +137,16 @@ public class Game extends JFrame implements Runnable {
             system.update();
         }
     }
-    @Override
+
+    /**
+     * Function return a Dimension of window
+     * @return Dimension
+     */
+    public Dimension getWindowDimension(){
+        return mypanel.getSize();
+    }
+
     public void paint(Graphics g){
-        super.paint(g);
         for(Line2D line: gameRender) {
             g.setColor(line.color);
             g.drawLine((int) line.start.getX(), (int) line.start.getY(), (int) line.end.getX(), (int) line.end.getY());
@@ -170,13 +156,13 @@ public class Game extends JFrame implements Runnable {
 
     @Override
     public void run() {
-        float timePerFrame = Mathf.pow(10, 9) / FPS_SET;
+        double timePerFrame = 1000000000.0 / FPS_SET;
 
         long previousTime = System.nanoTime();
         long lastCheck = System.currentTimeMillis();
 
         int frames = 0;
-        float deltaF = 0;
+        double deltaF = 0;
 
         while (true) {
             long currentTime = System.nanoTime();
@@ -184,10 +170,9 @@ public class Game extends JFrame implements Runnable {
             deltaF += (currentTime - previousTime) / timePerFrame;
             previousTime = currentTime;
 
-
             if (deltaF >= 1) {
                 update();
-                repaint();
+                mypanel.repaint();
                 frames++;
                 deltaF--;
             }

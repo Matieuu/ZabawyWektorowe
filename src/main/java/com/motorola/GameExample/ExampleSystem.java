@@ -1,7 +1,6 @@
 package com.motorola.GameExample;
 
 import java.awt.*;
-import java.util.Random;
 
 import com.motorola.Line2D;
 import com.motorola.Vector2;
