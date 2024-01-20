@@ -1,4 +1,6 @@
-package com.motorola;
+package com.motorola.engine;
+import com.motorola.engine.Vector2;
+
 import java.awt.*;
 
 
