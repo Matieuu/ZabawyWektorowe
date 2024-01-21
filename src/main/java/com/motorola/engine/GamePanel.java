@@ -9,12 +9,13 @@ public class GamePanel extends JPanel {
     // Konstruktor
     public GamePanel(Game game) {
         this.game = game;
-        this.setPreferredSize(new Dimension(1000, 600));
+        this.setPreferredSize(new Dimension(1600, 900));
     }
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        game.paint(g);
+        if (game.getStateManager() != null)
+            game.render(g);
     }
 
     public Game getGame() {

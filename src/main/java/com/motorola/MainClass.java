@@ -1,10 +1,10 @@
 package com.motorola;
 
-import com.motorola.GameExample.ExampleGame;
+import com.motorola.engine.Game;
 import com.motorola.engine.GameWindow;
 
 /**
- * Klasa główna
+ * Klasa glowna
  */
 public class MainClass {
     /**
@@ -13,12 +13,11 @@ public class MainClass {
     public MainClass() {}
 
     /**
-     * Metoda główna
-     * @param args Argumety, które obecnie nie są obsługiwane
+     * Metoda glowna
+     * @param args Argumety, ktore obecnie nie sa obslugiwane
      */
     public static void main(String[] args) {
-
-        GameWindow StartWindow = new GameWindow();
-
+        GameWindow startWindow = new GameWindow();
+        Game game = new Game("Mickiewiczowie", startWindow);
     }
 }

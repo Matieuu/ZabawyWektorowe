@@ -1,4 +1,4 @@
-package com.motorola.engine;
+package com.motorola.engine.graphics;
 
 /**
  * Wektor dwuwymiarowy
@@ -32,7 +32,7 @@ public class Vector2 {
     }
 
     /**
-     * Zwraca kwadrat długości wektora
+     * Zwraca kwadrat dlugosci wektora
      * @return x^2 + y^2
      */
     public double squaredMagnitude() {
@@ -40,14 +40,14 @@ public class Vector2 {
     }
 
     /**
-     * Długość wektora
-     * @return Długość wektora
+     * Dlugosc wektora
+     * @return Dlugosc wektora
      */
     public double magnitude() {
         return Math.sqrt(squaredMagnitude());
     }
     /**
-     * Zwraca wektor o tym samym kierunku ale dlugości 1
+     * Zwraca wektor o tym samym kierunku ale dlugosci 1
      */
     public Vector2 normalized() {
         return this.multiply(1/Math.sqrt(squaredMagnitude()));
@@ -61,6 +61,10 @@ public class Vector2 {
     public Vector2 add(Vector2 other) {
         return new Vector2(this.x + other.getX(), this.y + other.getY());
     }
+    public void increase(Vector2 other) {
+        x += other.getX();
+        y += other.getY();
+    }
     public Vector2 multiply(double multiplier) {
         return new Vector2(this.x*multiplier, this.y*multiplier);
     }
@@ -70,15 +74,15 @@ public class Vector2 {
     }
     // statics
     /**
-     * Skrót dla new Vector2(0f, 1f)
+     * Skrot dla new Vector2(0f, 1f)
      */
     public static Vector2 up = new Vector2(0, 1);
     /**
-     * Skrót dla new Vector2(1f, 0f)
+     * Skrot dla new Vector2(1f, 0f)
      */
     public static Vector2 right = new Vector2(1, 0);
     /**
-     * Skrót dla new Vector2(0f, 0f)
+     * Skrot dla new Vector2(0f, 0f)
      */
     public static Vector2 zero = new Vector2(0, 0);
 }
