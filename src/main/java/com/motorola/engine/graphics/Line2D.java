@@ -1,10 +1,10 @@
-package com.motorola.engine;
-import com.motorola.engine.Vector2;
+package com.motorola.engine.graphics;
 
 import java.awt.*;
 
 
 public class Line2D {
+
     public Vector2 start;
     public Vector2 end;
     public Color color;

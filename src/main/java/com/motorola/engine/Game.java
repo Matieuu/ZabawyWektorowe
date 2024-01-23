@@ -1,40 +1,46 @@
 package com.motorola.engine;
 
-import com.motorola.Line2D;
-import com.motorola.Vector2;
+import com.motorola.engine.graphics.Line2D;
+import com.motorola.engine.graphics.Vector2;
+import com.motorola.engine.states.StateManager;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Klasa gry
  */
 public class Game implements Runnable {
-    public static final int FPS_SET = 60;
-    private GamePanel mypanel;
-    private Thread gameThread;
-    private HashMap<String,GameObject> gameObjects;
-    private ArrayList<GameSystem> gameSystems;
-    private ArrayList<Line2D> gameRender;
 
+    public static final int FPS_SET = 60;
+
+    private GameWindow myWindow;
+    private GamePanel myPanel;
+    private StateManager stateManager;
+    private Thread gameThread;
+
+    private Map<String,GameObject> gameObjects;
+    private List<GameSystem> gameSystems;
     /**
      * Konstruktor
      */
     public Game(String title) {
-        mypanel = new GamePanel(this);
+        myPanel = new GamePanel(this);
+        myWindow = new GameWindow(myPanel);
 
         //Inicialization Arrays
         gameSystems = new ArrayList<GameSystem>();
         gameObjects = new HashMap<String,GameObject>();
-        gameRender = new ArrayList<Line2D>();
+        stateManager = new StateManager(this);
 
         // Start game loop
         gameThread = new Thread(this);
         gameThread.start();
 
         //Inicialization Window
-
     }
 
     /**
@@ -50,8 +56,7 @@ public class Game implements Runnable {
     public void addGameObject(GameObject gameObject){
         if(gameObjects.containsKey(gameObject.getKeyName())){
             //add clone
-        }
-        else {
+        } else {
             gameObjects.put(gameObject.getKeyName(),gameObject);
         }
     }
@@ -73,10 +78,11 @@ public class Game implements Runnable {
             if (gameObjects.containsKey(keyName)) {
                 return gameObjects.get(keyName);
             } else {
-                throw new IllegalArgumentException("Does not exist a GameObect with that keyname" + keyName);
+                throw new IllegalArgumentException("Does not exist a GameObject with that keyname " + keyName);
             }
         } catch (IllegalArgumentException e) {
-            System.out.println("Błąd: " + e.getMessage());
+            System.out.println("Critical Error: " + e.getMessage());
+            System.exit(1);
         }
         return null;
     }
@@ -93,7 +99,7 @@ public class Game implements Runnable {
                 }
                 gameObjects.remove(keyName);
             } else {
-                throw new IllegalArgumentException("Does not exist a GameObect with that keyname" + keyName);
+                throw new IllegalArgumentException("Does not exist a GameObject with that keyname " + keyName);
             }
         } catch (IllegalArgumentException e) {
             System.out.println("Critical Error: " + e.getMessage());
@@ -114,28 +120,19 @@ public class Game implements Runnable {
             }
         }
         return subGameObjects;
-    };
-    /**
-     * Function adds to quente line to draw
-     */
-    public void drawLine2D(Vector2 start,Vector2 end,Color color){
-        gameRender.add(new Line2D(start,end,color));
     }
+
     /**
-     * Function adds to quente line to draw
+     * Wywolywana FPS_SET razy na sekunde
+     * Jej cel to rysowanie gry
      */
-    public void drawLine2D(Line2D line){
-        gameRender.add(line);
+    private void update(double delta) {
+        stateManager.update(delta);
     }
-    /**
-     * Wywoływana Const.UPS_SET razy na sekundę
-     * Jej cel to aktualizowanie gry
-     */
-    private void update() {
-        for (GameSystem system : gameSystems) {
-            system.activeSearchForGameObjects();
-            system.update();
-        }
+
+    /** Jej cel to aktualizowanie gry */
+    public void render(Graphics g){
+        stateManager.render(g);
     }
 
     /**
@@ -143,15 +140,7 @@ public class Game implements Runnable {
      * @return Dimension
      */
     public Dimension getWindowDimension(){
-        return mypanel.getSize();
-    }
-
-    public void paint(Graphics g){
-        for(Line2D line: gameRender) {
-            g.setColor(line.color);
-            g.drawLine((int) line.start.getX(), (int) line.start.getY(), (int) line.end.getX(), (int) line.end.getY());
-        }
-        gameRender.clear();
+        return myPanel.getSize();
     }
 
     @Override
@@ -171,8 +160,8 @@ public class Game implements Runnable {
             previousTime = currentTime;
 
             if (deltaF >= 1) {
-                update();
-                mypanel.repaint();
+                update(deltaF);
+                myPanel.repaint();
                 frames++;
                 deltaF--;
             }
@@ -183,5 +172,22 @@ public class Game implements Runnable {
                 frames = 0;
             }
         }
+    }
+
+    public GamePanel getPanel() {
+        return myPanel;
+    }
+
+    public StateManager getStateManager() {
+        return stateManager;
+    }
+
+    public List<GameSystem> getGameSystems() {
+        return gameSystems;
+    }
+
+    public void clearGameECS(){
+        gameObjects.clear();
+        gameSystems.clear();
     }
 }

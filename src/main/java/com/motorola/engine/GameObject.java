@@ -11,15 +11,15 @@ import java.util.Map;
 public class GameObject {
     protected Game mygame;
     /**
-     * Nazwa obiektu ma przectawiać jego typ w grze
+     * Nazwa obiektu ma przectawiac jego typ w grze
      */
     private String name;
     /**
-     * Nazwa klucz do tablicy obiektów
+     * Nazwa klucz do tablicy obiektow
      */
     private String keyname;
     /**
-     * Hash mapa pozwala na dodanie klucza(Srring) i Wartości(Jaki kolniek Obiekt który castujemy do naszego w przypadku nieprawidłowego castowania powinien! wyrzucić błąd)
+     * Hash mapa pozwala na dodanie klucza(Srring) i Wartosci(Jaki kolniek Obiekt ktory castujemy do naszego w przypadku nieprawidlowego castowania powinien! wyrzucic blad)
      */
     private Map<String, Object> components;
     public GameObject(Game mygame,String name){
@@ -48,7 +48,7 @@ public class GameObject {
             if (components.containsKey(valueName)) {
                 return components.get(valueName);
             } else {
-                throw new IllegalArgumentException("KeyValue '" + valueName + "' does not exist in GameObect" + name + " With " + keyname);
+                throw new IllegalArgumentException("KeyValue '" + valueName + "' does not exist in GameObject " + name + " With " + keyname);
             }
         } catch (IllegalArgumentException e) {
             System.out.println("Critical Error: " + e.getMessage());
@@ -56,7 +56,7 @@ public class GameObject {
         }
         return null;
     }
-    public void addValue(String valueName, Object ofValue){
+    public void setValue(String valueName, Object ofValue){
         components.put(valueName,ofValue);
     }
     public String getKeyName(){return keyname;}

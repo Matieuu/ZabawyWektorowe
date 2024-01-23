@@ -1,4 +1,4 @@
-package com.motorola.engine;
+package com.motorola.engine.graphics;
 
 public class Quaternion {
     private double w, x, y, z;

@@ -6,15 +6,18 @@ import java.awt.event.WindowFocusListener;
 
 public class GameWindow extends JFrame {
 
+    private GamePanel statePanel;
+
     // Konstruktor
-    public GameWindow() {
-        this.pack();
+    public GameWindow(GamePanel panel) {
+        add(panel);
+        pack();
 
-        this.setResizable(false);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setLocationRelativeTo(null);
+        setResizable(false);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
 
-        this.addWindowFocusListener(new WindowFocusListener() {
+        addWindowFocusListener(new WindowFocusListener() {
             @Override
             public void windowGainedFocus(WindowEvent e) {
             }
@@ -22,9 +25,25 @@ public class GameWindow extends JFrame {
             public void windowLostFocus(WindowEvent e) {
             }
         });
-    }
 
+        setVisible(true);
+    }
+    public void getGamePanel(GamePanel panel){
+        this.statePanel = panel;
+    }
     public void addPanel(GamePanel gamePanel){
-        this.add(gamePanel);
+        add(gamePanel);
+        pack();
+    }
+    public void rmPanel(GamePanel gamePanel) {
+        statePanel = gamePanel;
+        remove(gamePanel);
+        pack();
+    }
+    public void setPanel(GamePanel gamePanel) {
+        if (statePanel != null)
+            remove(statePanel);
+        add(gamePanel);
+        pack();
     }
 }

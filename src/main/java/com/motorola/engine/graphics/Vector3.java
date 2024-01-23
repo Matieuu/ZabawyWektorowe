@@ -1,7 +1,7 @@
-package com.motorola.engine;
+package com.motorola.engine.graphics;
 
 /**
- * Wektor trójwymiarowy
+ * Wektor trojwymiarowy
  */
 public class Vector3 {
     private double x, y, z;
@@ -40,7 +40,7 @@ public class Vector3 {
         return z;
     }
     /**
-     * Zwraca kwadrat długości wektora
+     * Zwraca kwadrat dlugosci wektora
      * @return x^2 + y^2 + z^2
      */
     public double squaredMagnitude() {
@@ -48,14 +48,14 @@ public class Vector3 {
     }
 
     /**
-     * Długość wektora
-     * @return Długość wektora
+     * Dlugosc wektora
+     * @return Dlugosc wektora
      */
     public double magnitude() {
         return Math.sqrt(squaredMagnitude());
     }
     /**
-     * Zwraca wektor o tym samym kierunku ale dlugości 1
+     * Zwraca wektor o tym samym kierunku ale dlugosci 1
      */
     public Vector3 normalized() {
         return this.multiply(1/Math.sqrt(squaredMagnitude()));
@@ -75,19 +75,19 @@ public class Vector3 {
     }
     // statics
     /**
-     * Skrót dla new Vector3(0f, 1f, 0f)
+     * Skrot dla new Vector3(0f, 1f, 0f)
      */
     public static Vector3 up = new Vector3(0, 1, 0);
     /**
-     * Skrót dla new Vector3(1f, 0f, 0f)
+     * Skrot dla new Vector3(1f, 0f, 0f)
      */
     public static Vector3 right = new Vector3(1, 0, 0);
     /**
-     * Skrót dla new Vector3(0f, 0f, 1f)
+     * Skrot dla new Vector3(0f, 0f, 1f)
      */
     public static Vector3 forward = new Vector3(0, 0, 1);
     /**
-     * Skrót dla new Vector3(0f, 0f, 0f)
+     * Skrot dla new Vector3(0f, 0f, 0f)
      */
     public static Vector3 zero = new Vector3(0, 0, 0);
 }

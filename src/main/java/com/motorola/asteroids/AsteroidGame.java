@@ -1,16 +1,15 @@
-package com.motorola.Asteroids;
-import com.motorola.engine.Game;
-import com.motorola.engine.GameObject;
-import com.motorola.engine.GamePanel;
-import com.motorola.engine.GameSystem;
+package com.motorola.asteroids;
+import com.motorola.engine.*;
+
+import java.awt.*;
+import java.util.List;
 
 public class AsteroidGame extends GameSystem {
-    public AsteroidGame(){
+    public AsteroidGame() {
         super(new Game("Asteroids"));
 
         new GameObject(this.mygame,"Player");
         this.addObjectByName("Player");
-
     }
 
     @Override
@@ -19,7 +18,12 @@ public class AsteroidGame extends GameSystem {
     }
 
     @Override
-    public void update() {
+    public void update(double delta) {
+
+    }
+
+    @Override
+    public void render(Graphics g) {
 
     }
 }
