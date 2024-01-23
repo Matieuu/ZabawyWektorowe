@@ -18,12 +18,11 @@ public abstract class State {
     }
 
     public void stateUpdate(double delta) {
+        update(delta);
         for (GameSystem system : game.getGameSystems()) {
             system.activeSearchForGameObjects();
             system.update(delta);
         }
-
-        update(delta);
     }
 
     public void render(Graphics g) {

@@ -23,17 +23,25 @@ public class StateManager {
         states.push(state);
     }
 
+    /**
+     *
+     * @return
+     */
     public State pop() {
         return states.pop();
     }
 
+    /**
+     * adding state to top
+     * @return state from top
+     */
     public State peek() {
         return states.peek();
     }
 
     public void set(State state) {
 //        System.out.println(states.pop().getClass().getName() +" disposed");
-        states.pop();
+        states.clear();
         states.push(state);
     }
 

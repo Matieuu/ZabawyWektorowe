@@ -9,7 +9,8 @@ public class GameWindow extends JFrame {
     private GamePanel statePanel;
 
     // Konstruktor
-    public GameWindow() {
+    public GameWindow(GamePanel panel) {
+        add(panel);
         pack();
 
         setResizable(false);

@@ -107,14 +107,6 @@ public abstract class ButtonSystem extends GameSystem implements InputSystem {
     }
 
     @Override
-    public void update(double delta) {
-    }
-
-    @Override
-    public void render(Graphics g) {
-    }
-
-    @Override
     public void mousePressed(MouseEvent e) {
         if (bounds.contains(e.getX(), e.getY()))
             pressed = true;
@@ -133,6 +125,10 @@ public abstract class ButtonSystem extends GameSystem implements InputSystem {
         if (hover) onHover(e);
     }
 
+    @Override
+    public abstract void update(double delta);
+    @Override
+    public abstract void render(Graphics g);
     public abstract void onClick(MouseEvent e);
     public abstract void onHover(MouseEvent e);
 }

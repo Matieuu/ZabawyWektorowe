@@ -17,7 +17,6 @@ public class MainClass {
      * @param args Argumety, ktore obecnie nie sa obslugiwane
      */
     public static void main(String[] args) {
-        GameWindow startWindow = new GameWindow();
-        Game game = new Game("Mickiewiczowie", startWindow);
+        Game game = new Game("Mickiewiczowie");
     }
 }

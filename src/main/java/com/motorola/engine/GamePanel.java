@@ -6,7 +6,6 @@ public class GamePanel extends JPanel {
 
     private Game game;
 
-    // Konstruktor
     public GamePanel(Game game) {
         this.game = game;
         this.setPreferredSize(new Dimension(1600, 900));

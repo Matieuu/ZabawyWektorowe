@@ -3,6 +3,7 @@ package com.motorola.gameExample;
 import com.motorola.engine.Game;
 import com.motorola.engine.GameObject;
 import com.motorola.engine.GameSystem;
+import com.motorola.engine.default_systems.Renderer2D;
 import com.motorola.engine.states.State;
 
 public class ExampleState extends State {
@@ -22,6 +23,5 @@ public class ExampleState extends State {
 
     @Override
     public void update(double delta) {
-
     }
 }

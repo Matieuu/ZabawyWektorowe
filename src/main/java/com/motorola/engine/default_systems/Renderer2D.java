@@ -20,12 +20,15 @@ public class Renderer2D extends GameSystem {
     @Override
     public void addToGameObjectValues(GameObject gameObject) {
     }
+
     public void addObject(GameObject object) {
         objectsToRender.add(object);
     }
+
     public void deleteObject(GameObject object) {
         objectsToRender.remove(object);
     }
+
     @Override
     public void update(double delta){
     }

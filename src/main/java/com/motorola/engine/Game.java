@@ -14,6 +14,7 @@ import java.util.Map;
  * Klasa gry
  */
 public class Game implements Runnable {
+
     public static final int FPS_SET = 60;
 
     private GameWindow myWindow;
@@ -26,10 +27,9 @@ public class Game implements Runnable {
     /**
      * Konstruktor
      */
-    public Game(String title, GameWindow gameWindow) {
-        myWindow = gameWindow;
+    public Game(String title) {
         myPanel = new GamePanel(this);
-        myWindow.setPanel(myPanel);
+        myWindow = new GameWindow(myPanel);
 
         //Inicialization Arrays
         gameSystems = new ArrayList<GameSystem>();

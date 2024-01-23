@@ -2,10 +2,11 @@ package com.motorola.asteroids;
 import com.motorola.engine.*;
 
 import java.awt.*;
+import java.util.List;
 
 public class AsteroidGame extends GameSystem {
-    public AsteroidGame(GameWindow myGamewindow){
-        super(new Game("Asteroids",myGamewindow));
+    public AsteroidGame() {
+        super(new Game("Asteroids"));
 
         new GameObject(this.mygame,"Player");
         this.addObjectByName("Player");
