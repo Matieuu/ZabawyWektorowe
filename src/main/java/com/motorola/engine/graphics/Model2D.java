@@ -7,9 +7,10 @@ import java.util.ArrayList;
  */
 public class Model2D {
     /**
-     * Lista zawierajaca wszystkie Line2D linie
+     * Returns all Vector2 verticies positions
      */
-    private ArrayList<Line2D> lines;
+    private ArrayList<Vector2> vertices;
+    private ArrayList<Line> edges;
     /**
      * Skalar pozwalajacy na wybranie rozmiaru obiektu w swiecie gry
      */
@@ -27,34 +28,37 @@ public class Model2D {
     public void setScale(double scale) {
         this.scale = scale;
     }
-    /**
-     * Konstruktor
-     * @param lines Lista linii Line2D ktore skladaja sie na model
-     */
-    public Model2D(ArrayList<Line2D> lines) {
-        this.lines = lines;
+
+    public ArrayList<Vector2> getVerticies() {
+        return vertices;
     }
+
+    public void setVertices(ArrayList<Vector2> verticies) {
+        this.vertices = verticies;
+    }
+
+    public ArrayList<Line> getEdges() {
+        return edges;
+    }
+
+    public void setEdges(ArrayList<Line> edges) {
+        this.edges = edges;
+    }
+
     /**
      * Konstruktor
-     * @param lines Lista linii Line2D ktore skladaja sie na model
+     * @param vertices Lista linii Line2D ktore skladaja sie na model
      * @param scale scale
      */
-    public Model2D(ArrayList<Line2D> lines, double scale) {
-        this.lines = lines;
+
+    public Model2D(ArrayList<Vector2> vertices, ArrayList<Line> edges, double scale) {
+        this.vertices = vertices;
+        this.edges = edges;
         this.scale = scale;
     }
-    /**
-     * Zwraca gotowa liste linii Line2D uwzgledniajac skalowanie i obrot
-     */
-    public ArrayList<Line2D> getModel(Quaternion rotation) {
-        ArrayList<Line2D> model = new ArrayList<>();
 
-        for (Line2D line : lines) {
-            model.add(new Line2D(
-                    Quaternion.rotatePoint(line.start, rotation).multiply(scale),
-                    Quaternion.rotatePoint(line.end, rotation).multiply(scale),
-                    line.color));
-        }
-        return model;
+    @Override
+    public String toString() {
+        return "Model2D (vertices: " + vertices.size() +")";
     }
 }

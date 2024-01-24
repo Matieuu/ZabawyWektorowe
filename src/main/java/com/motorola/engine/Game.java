@@ -1,7 +1,5 @@
 package com.motorola.engine;
 
-import com.motorola.engine.graphics.Line2D;
-import com.motorola.engine.graphics.Vector2;
 import com.motorola.engine.states.StateManager;
 
 import java.awt.*;

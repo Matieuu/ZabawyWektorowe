@@ -7,7 +7,8 @@ public class Transform {
 
     }
     public Transform(Vector3 position, Quaternion rotation) {
-
+        this.position = position;
+        this.rotation = rotation;
     }
     public Quaternion getRotation() {
         return rotation;
@@ -20,5 +21,10 @@ public class Transform {
     }
     public void setRotation(Quaternion rotation) {
         this.rotation = rotation;
+    }
+
+    @Override
+    public String toString() {
+        return "Transform (" + position + ", " + rotation + ")";
     }
 }

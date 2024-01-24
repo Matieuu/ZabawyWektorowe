@@ -3,6 +3,7 @@ package com.motorola.engine.states;
 import com.motorola.engine.Game;
 import com.motorola.gameExample.ExampleState;
 import com.motorola.menu.MenuState;
+import com.motorola.test2D.Test2DState;
 
 import java.awt.*;
 import java.util.Stack;
@@ -16,7 +17,8 @@ public class StateManager {
     public StateManager(Game game) {
         this.game = game;
         states = new Stack<>();
-        states.push(new ExampleState(game));
+        //states.push(new ExampleState(game));
+        states.push(new Test2DState(game));
     }
 
     public void push(State state) {

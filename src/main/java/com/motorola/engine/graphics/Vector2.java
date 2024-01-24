@@ -74,15 +74,15 @@ public class Vector2 {
     }
     // statics
     /**
-     * Skrot dla new Vector2(0f, 1f)
+     * Skrot dla new Vector2(0, 1)
      */
     public static Vector2 up = new Vector2(0, 1);
     /**
-     * Skrot dla new Vector2(1f, 0f)
+     * Skrot dla new Vector2(1, 0)
      */
     public static Vector2 right = new Vector2(1, 0);
     /**
-     * Skrot dla new Vector2(0f, 0f)
+     * Skrot dla new Vector2(0, 0)
      */
     public static Vector2 zero = new Vector2(0, 0);
 }
