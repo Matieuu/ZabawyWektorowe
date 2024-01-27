@@ -2,27 +2,20 @@ package com.motorola.engine.graphics;
 
 import java.util.ArrayList;
 
-/**
- * Komponent zawierajacy dane o tym jak wyswietlac obiekt na ekranie
- */
-public class Model2D {
-
-    /**
-     * Returns all Vector2 verticies positions
-     */
-    private ArrayList<Vector2> vertices;
+public class Model {
+    private ArrayList<Vector3> vertices;
     private ArrayList<Line> edges;
     /**
      * Skalar pozwalajacy na wybranie rozmiaru obiektu w swiecie gry
      */
-    private double scale = 1f; //TODO zamienic double na Vector2 tak zeby mozna bylo osobno skalowac w dwoch plaszczyznach
+    private double scale = 1f; //TODO zamienic double na Vector3 tak zeby mozna bylo osobno skalowac w dwoch plaszczyznach
 
     /**
      * Konstruktor
      * @param vertices Lista linii Line2D ktore skladaja sie na model
      * @param scale scale
      */
-    public Model2D(ArrayList<Vector2> vertices, ArrayList<Line> edges, double scale) {
+    public Model(ArrayList<Vector3> vertices, ArrayList<Line> edges, double scale) {
         this.vertices = vertices;
         this.edges = edges;
         this.scale = scale;
@@ -34,7 +27,7 @@ public class Model2D {
     public double getScale() {
         return scale;
     }
-    public ArrayList<Vector2> getVerticies() {
+    public ArrayList<Vector3> getVerticies() {
         return vertices;
     }
     public ArrayList<Line> getEdges() {
@@ -48,7 +41,7 @@ public class Model2D {
     public void setScale(double scale) {
         this.scale = scale;
     }
-    public void setVertices(ArrayList<Vector2> verticies) {
+    public void setVertices(ArrayList<Vector3> verticies) {
         this.vertices = verticies;
     }
     public void setEdges(ArrayList<Line> edges) {

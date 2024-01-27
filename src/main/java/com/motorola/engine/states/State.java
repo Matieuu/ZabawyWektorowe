@@ -2,8 +2,8 @@ package com.motorola.engine.states;
 
 import com.motorola.engine.Game;
 import com.motorola.engine.GameSystem;
-import com.motorola.engine.default_systems.KeyboardControler;
-import com.motorola.engine.default_systems.MouseControler;
+import com.motorola.engine.default_systems.KeyboardController;
+import com.motorola.engine.default_systems.MouseController;
 
 import java.awt.*;
 
@@ -13,8 +13,9 @@ public abstract class State {
 
     public State(Game game) {
         this.game = game;
-        game.addGameSystem(new KeyboardControler(game));
-        game.addGameSystem(new MouseControler(game));
+        game.clearGameECS();
+        game.addGameSystem(new KeyboardController(game));
+        game.addGameSystem(new MouseController(game));
     }
 
     public void stateUpdate(double delta) {
@@ -26,6 +27,8 @@ public abstract class State {
     }
 
     public void render(Graphics g) {
+        g.setColor(Color.BLACK);
+        g.fillRect(0, 0, game.getWindowDimension().width, game.getWindowDimension().height);
         for (GameSystem system : game.getGameSystems()) {
             system.activeSearchForGameObjects();
             system.render(g);

@@ -39,14 +39,16 @@ public class Renderer2D extends GameSystem {
             ArrayList<Vector2> vertices = model.getVerticies();
 
             for (Line edge : model.getEdges()) {
-                Vector2 start = vertices.get(edge.getStart())
-                        .add(new Vector2(position.getX(), position.getY()))
-                        .add(new Vector2((double) mygame.getWindowDimension().width/2, (double) mygame.getWindowDimension().height/2));
-                Vector2 end = vertices.get(edge.getEnd())
-                        .add(new Vector2(position.getX(), position.getY()))
-                        .add(new Vector2((double) mygame.getWindowDimension().width/2, (double) mygame.getWindowDimension().height/2));
-                System.out.print("start: " + start + " >>> ");
-                System.out.print("end: " + end + "\n");
+                Vector2 rawStart = Quaternion.rotatePoint(vertices.get(edge.getStart()), transform.getRotation());
+                Vector2 start = new Vector2(rawStart.getX(), -rawStart.getY())
+                        .multiply(model.getScale())
+                        .add(new Vector2((double) game.getWindowDimension().width/2, (double) game.getWindowDimension().height/2))
+                        .add(new Vector2(position.getX(), -position.getY()));
+                Vector2 rawEnd = Quaternion.rotatePoint(vertices.get(edge.getEnd()), transform.getRotation());
+                Vector2 end = new Vector2(rawEnd.getX(), -rawEnd.getY())
+                        .multiply(model.getScale())
+                        .add(new Vector2((double) game.getWindowDimension().width/2, (double) game.getWindowDimension().height/2))
+                        .add(new Vector2(position.getX(), -position.getY()));
                 g.setColor(edge.getColor());
                 g.drawLine(
                         (int)start.getX(), (int)start.getY(),
@@ -55,7 +57,5 @@ public class Renderer2D extends GameSystem {
 
             }
         }
-        g.setColor(Color.BLACK);
-        g.drawLine(0,0,mygame.getWindowDimension().width,mygame.getWindowDimension().height);
     }
 }

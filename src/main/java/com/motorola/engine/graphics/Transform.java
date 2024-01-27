@@ -22,6 +22,13 @@ public class Transform {
     public void setRotation(Quaternion rotation) {
         this.rotation = rotation;
     }
+    public void rotate(double angle) {
+        rotation = Quaternion.createEulerAngles(
+                rotation.getEulerAnglesDegree().getX(),
+                rotation.getEulerAnglesDegree().getY(),
+                rotation.getEulerAnglesDegree().getZ() + angle        
+        );
+    }
 
     @Override
     public String toString() {

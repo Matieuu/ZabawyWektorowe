@@ -184,7 +184,7 @@ public class Game implements Runnable {
         return gameSystems;
     }
 
-    public void clearGameECS(){
+    public void clearGameECS() {
         gameObjects.clear();
         gameSystems.clear();
     }

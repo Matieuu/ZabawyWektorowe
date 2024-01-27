@@ -9,7 +9,7 @@ import java.util.Map;
  *  //abstract class
  */
 public class GameObject {
-    protected Game mygame;
+    protected Game game;
     /**
      * Nazwa obiektu ma przectawiac jego typ w grze
      */
@@ -22,12 +22,12 @@ public class GameObject {
      * Hash mapa pozwala na dodanie klucza(Srring) i Wartosci(Jaki kolniek Obiekt ktory castujemy do naszego w przypadku nieprawidlowego castowania powinien! wyrzucic blad)
      */
     private Map<String, Object> components;
-    public GameObject(Game mygame,String name){
+    public GameObject(Game game,String name){
         this.components = new HashMap<>();
         this.name = name;
-        this.mygame = mygame;
-        keyname = mygame.genKeyName(this.name);
-        mygame.addGameObject(this);
+        this.game = game;
+        keyname = game.genKeyName(this.name);
+        game.addGameObject(this);
     }
 
     /**
@@ -56,16 +56,17 @@ public class GameObject {
         }
         return null;
     }
-    public void setValue(String valueName, Object ofValue){
+    public Object setValue(String valueName, Object ofValue){
         components.put(valueName,ofValue);
+        return getValue(valueName);
     }
     public String getKeyName(){return keyname;}
     public String getName(){return name;}
-    public Game getGame(){return mygame;}
+    public Game getGame(){return game;}
     /**
      * Function deletes object from all arrays
      */
     public void destroy(){
-        mygame.removeGameObject(keyname);
+        game.removeGameObject(keyname);
     }
 }

@@ -18,23 +18,28 @@ public class StateManager {
         this.game = game;
         states = new Stack<>();
         //states.push(new ExampleState(game));
-        states.push(new Test2DState(game));
+        //states.push(new Test2DState(game));
+        states.push(new MenuState(game));
     }
 
+    /**
+     * adding another state
+     * @param state
+     */
     public void push(State state) {
         states.push(state);
     }
 
     /**
-     *
-     * @return
+     * removing state from top
+     * @return removed state
      */
     public State pop() {
         return states.pop();
     }
 
     /**
-     * adding state to top
+     * getting state to top
      * @return state from top
      */
     public State peek() {
@@ -45,6 +50,7 @@ public class StateManager {
 //        System.out.println(states.pop().getClass().getName() +" disposed");
         states.clear();
         states.push(state);
+        System.out.println("State changed: " + peek());
     }
 
     public void update(double delta) {

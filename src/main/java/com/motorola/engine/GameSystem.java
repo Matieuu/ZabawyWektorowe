@@ -9,19 +9,19 @@ import java.util.List;
  *  GameSystem
 */
 public abstract class GameSystem {
-    protected Game mygame;
-    protected List<GameObject> usedObjects;
+    protected Game game;
+protected List<GameObject> usedObjects;
     private List<String> activeAddObjects;
 
     /**
      * Konstructor for Gamesystem
-     * @param mygame
+     * @param game
      */
-    public GameSystem(Game mygame){
+    public GameSystem(Game game){
         usedObjects = new ArrayList<GameObject>();
         activeAddObjects = new ArrayList<String>();
-        this.mygame = mygame;
-        mygame.addGameSystem(this);
+        this.game = game;
+        game.addGameSystem(this);
     }
     /**
      * It add GameObjects with the same name to System
@@ -29,17 +29,17 @@ public abstract class GameSystem {
      * find new GameObjects with that name
      * @param name
      */
-    public void addObjectByName(String name){
+    public void addObjectsByName(String name) {
         ArrayList<GameObject> objectsByName;
-        if(name.charAt(0) == '*'){
+        if (name.charAt(0) == '*') {
             String justName = name.substring(1);
             activeAddObjects.add(justName);
-            objectsByName = mygame.getObjectsByName(justName);
-        }else {
-            objectsByName = mygame.getObjectsByName(name);
+            objectsByName = game.getObjectsByName(justName);
+        } else {
+            objectsByName = game.getObjectsByName(name);
         }
         usedObjects.addAll(objectsByName);
-        for(GameObject gameObject : objectsByName){
+        for (GameObject gameObject : objectsByName) {
             addToGameObjectValues(gameObject);
         }
     }
@@ -48,7 +48,7 @@ public abstract class GameSystem {
      * @param keyName
      */
     public void addObjectByKeyName(String keyName){
-        GameObject objectByKey = mygame.getObjectByKey(keyName);
+        GameObject objectByKey = game.getObjectByKey(keyName);
         if (objectByKey == null) return;
         addToGameObjectValues(objectByKey);
         usedObjects.add(objectByKey);
@@ -93,7 +93,7 @@ public abstract class GameSystem {
      */
     public void activeSearchForGameObjects(){
         for(String name :activeAddObjects){
-            addObjectByName(name);
+            addObjectsByName(name);
         }
     }
     /**

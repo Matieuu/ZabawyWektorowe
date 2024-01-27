@@ -3,7 +3,6 @@ package com.motorola.engine.default_systems;
 import com.motorola.engine.Game;
 import com.motorola.engine.GameObject;
 import com.motorola.engine.GameSystem;
-import com.motorola.engine.default_systems.InputSystem;
 import com.motorola.engine.graphics.Vector2;
 
 import java.awt.*;
@@ -11,38 +10,38 @@ import java.awt.event.MouseEvent;
 
 public abstract class ButtonSystem extends GameSystem implements InputSystem {
 
-    private Rectangle bounds;
+    protected Rectangle bounds;
 
-    private Color color;
-    private int round;
+    protected Color color;
+    protected int round;
 
-    private String content;
-    private boolean pressed, hover;
+    protected String content;
+    protected boolean pressed, hover;
 
     /**
      * Konstructor for Gamesystem
      *
-     * @param mygame
+     * @param game
      */
-    public ButtonSystem(Game mygame, String content) {
-        super(mygame);
+    public ButtonSystem(Game game, String content) {
+        super(game);
         bounds = new Rectangle();
         this.content = content;
         pressed = false;
         hover = false;
     }
 
-    public ButtonSystem setLocalization(Point p) {
+    public ButtonSystem setLocation(Point p) {
         bounds.x = p.x;
         bounds.y = p.y;
         return this;
     }
-    public ButtonSystem setLocalization(Vector2 p) {
+    public ButtonSystem setLocation(Vector2 p) {
         bounds.x = (int)p.getX();
         bounds.y = (int)p.getY();
         return this;
     }
-    public ButtonSystem setLocalization(int x, int y) {
+    public ButtonSystem setLocation(int x, int y) {
         bounds.x = x;
         bounds.y = y;
         return this;
@@ -108,8 +107,7 @@ public abstract class ButtonSystem extends GameSystem implements InputSystem {
 
     @Override
     public void mousePressed(MouseEvent e) {
-        if (bounds.contains(e.getX(), e.getY()))
-            pressed = true;
+        pressed = bounds.contains(e.getX(), e.getY());
     }
 
     @Override

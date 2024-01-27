@@ -9,19 +9,25 @@ import java.awt.*;
 public class AsteroidsSystem extends GameSystem {
 
     public float asteroidDelay;
+    public float currentAsteroidDelay;
 
     public AsteroidsSystem(Game mygame_){
         super(mygame_);
+        this.addObjectsByName("*Asteroid");
     }
 
     @Override
     public void addToGameObjectValues(GameObject gameObject) {
-
     }
 
     @Override
     public void update(double delta) {
-
+        if (asteroidDelay > currentAsteroidDelay){
+            currentAsteroidDelay += delta;
+        }
+        else{
+            new GameObject(game,"Asteroid");
+        }
     }
 
     @Override
