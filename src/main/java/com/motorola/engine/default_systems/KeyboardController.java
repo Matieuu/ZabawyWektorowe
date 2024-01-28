@@ -21,11 +21,11 @@ public class KeyboardController extends GameSystem implements KeyListener {
     public KeyboardController(Game mygame){
         super(mygame);
 
-        checkForKeys = (ArrayList<Integer>) List.of(
+        /*checkForKeys = (ArrayList<Integer>) List.of(
                 KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT, KeyEvent.VK_UP, KeyEvent.VK_DOWN,
                 KeyEvent.VK_ENTER, KeyEvent.VK_SHIFT, KeyEvent.VK_ESCAPE,
                 KeyEvent.VK_Z, KeyEvent.VK_X, KeyEvent.VK_A, KeyEvent.VK_S, KeyEvent.VK_Q, KeyEvent.VK_E
-        );
+        );*/ //zategowalem to bo wywalalo blad /sg
 
         mygame.getPanel().addKeyListener(this);
     }

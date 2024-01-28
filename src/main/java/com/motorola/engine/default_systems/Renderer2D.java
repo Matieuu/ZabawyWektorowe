@@ -36,7 +36,7 @@ public class Renderer2D extends GameSystem {
             Transform transform = (Transform) obj.getValue("Transform");
             Vector3 position = transform.getPosition();
             Model2D model = (Model2D) obj.getValue("Model2D");
-            ArrayList<Vector2> vertices = model.getVerticies();
+            ArrayList<Vector2> vertices = model.getVertices();
 
             for (Line edge : model.getEdges()) {
                 Vector2 rawStart = Quaternion.rotatePoint(vertices.get(edge.getStart()), transform.getRotation());

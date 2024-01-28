@@ -68,9 +68,7 @@ public class Quaternion {
     }
     public Vector3 getEulerAnglesRadians() {
         double pitch = Math.asin(2*(w*y-x*z)); //pitch
-        //double yaw = Math.atan2(2*(w*z+x*y), w*w+x*x-y*y-z*z); //yaw
         double yaw = Math.atan2(2*(w*z+x*y), (w*w+x*x-y*y-z*z)); //yaw
-        //double roll = Math.atan2(2*(w*x+y*z), w*w-x*x-y*y+z*z); //roll
         double roll = Math.atan2(2*(w*x+y*z), (w*w-x*x-y*y+z*z)); //roll
 
         if (pitch == Math.PI/2) {

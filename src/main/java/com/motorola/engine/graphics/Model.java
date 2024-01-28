@@ -27,7 +27,7 @@ public class Model {
     public double getScale() {
         return scale;
     }
-    public ArrayList<Vector3> getVerticies() {
+    public ArrayList<Vector3> getVertices() {
         return vertices;
     }
     public ArrayList<Line> getEdges() {
@@ -50,6 +50,6 @@ public class Model {
 
     @Override
     public String toString() {
-        return "Model2D (vertices: " + vertices.size() +")";
+        return "Model (vertices: " + vertices.size() + ", edges: " + edges.size() +  ")" ;
     }
 }
