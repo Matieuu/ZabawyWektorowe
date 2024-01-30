@@ -2,6 +2,9 @@ package com.motorola.engine.default_systems;
 
 import com.motorola.engine.*;
 import com.motorola.engine.graphics.*;
+import com.motorola.engine.graphics.Line;
+import com.motorola.engine.graphics.Vector2;
+import com.motorola.engine.graphics.Vector3;
 
 import java.awt.*;
 import java.util.ArrayList;

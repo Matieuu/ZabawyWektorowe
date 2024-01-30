@@ -26,7 +26,7 @@ public class Transform {
         rotation = Quaternion.createEulerAngles(
                 rotation.getEulerAnglesDegree().getX(),
                 rotation.getEulerAnglesDegree().getY(),
-                rotation.getEulerAnglesDegree().getZ() + angle        
+                rotation.getEulerAnglesDegree().getZ() + angle
         );
     }
 

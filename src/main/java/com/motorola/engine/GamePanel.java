@@ -1,4 +1,6 @@
 package com.motorola.engine;
+import com.motorola.engine.default_systems.KeyboardEventListener;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -8,7 +10,7 @@ public class GamePanel extends JPanel {
 
     public GamePanel(Game game) {
         this.game = game;
-        this.setPreferredSize(new Dimension(1600, 900));
+        setPreferredSize(new Dimension(1600, 900));
     }
 
     public void paintComponent(Graphics g) {

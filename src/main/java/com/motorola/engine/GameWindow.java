@@ -1,5 +1,7 @@
 package com.motorola.engine;
 
+import com.motorola.engine.default_systems.KeyboardEventListener;
+
 import javax.swing.*;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowFocusListener;
@@ -8,10 +10,15 @@ public class GameWindow extends JFrame {
 
     private GamePanel statePanel;
 
+    private KeyboardEventListener kbListener;
+
     // Konstruktor
     public GameWindow(GamePanel panel) {
         add(panel);
         pack();
+
+        kbListener = new KeyboardEventListener(panel.getGame());
+        addKeyListener(kbListener);
 
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -45,5 +52,9 @@ public class GameWindow extends JFrame {
             remove(statePanel);
         add(gamePanel);
         pack();
+    }
+
+    public KeyboardEventListener getKbListener() {
+        return kbListener;
     }
 }

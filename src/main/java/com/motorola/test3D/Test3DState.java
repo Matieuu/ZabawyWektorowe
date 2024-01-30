@@ -3,6 +3,8 @@ package com.motorola.test3D;
 import com.motorola.engine.*;
 import com.motorola.engine.default_systems.*;
 import com.motorola.engine.graphics.*;
+import com.motorola.engine.graphics.Line;
+import com.motorola.engine.graphics.Vector3;
 import com.motorola.engine.states.*;
 
 import java.awt.*;
@@ -65,7 +67,7 @@ public class Test3DState extends State {
     @Override
     public void update(double delta) {
         Transform transform = ((Transform) game.getObjectsByName("Cube").get(0).getValue("Transform"));
-        angle += Math.PI/8;
+        angle += Math.PI/128;
         transform.setRotation(Quaternion.createEulerAngles(0,angle,0));
 
         System.out.print(transform.getRotation().getEulerAnglesRadians() + "\n");

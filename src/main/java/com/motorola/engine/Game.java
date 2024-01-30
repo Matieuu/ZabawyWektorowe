@@ -188,4 +188,8 @@ public class Game implements Runnable {
         gameObjects.clear();
         gameSystems.clear();
     }
+
+    public GameWindow getWindow() {
+        return myWindow;
+    }
 }

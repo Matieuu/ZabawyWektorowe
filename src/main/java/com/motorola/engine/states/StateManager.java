@@ -20,8 +20,8 @@ public class StateManager {
         states = new Stack<>();
         //states.push(new ExampleState(game));
         //states.push(new Test2DState(game));
-        //states.push(new MenuState(game));
-        states.push(new Test3DState(game));
+        states.push(new MenuState(game));
+        //states.push(new Test3DState(game));
     }
 
     /**
@@ -41,7 +41,7 @@ public class StateManager {
     }
 
     /**
-     * getting state to top
+     * getting state from top
      * @return state from top
      */
     public State peek() {

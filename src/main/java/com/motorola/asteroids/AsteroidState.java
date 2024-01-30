@@ -15,7 +15,6 @@ public class AsteroidState extends State {
         render.addObjectsByName("Player");
         new AsteroidsSystem(game);
 
-
     }
 
     @Override

@@ -5,8 +5,12 @@ import com.motorola.engine.GameObject;
 import com.motorola.engine.GameSystem;
 import com.motorola.engine.default_systems.Renderer2D;
 import com.motorola.engine.graphics.*;
+import com.motorola.engine.graphics.Line;
+import com.motorola.engine.graphics.Vector2;
+import com.motorola.engine.graphics.Vector3;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 public class ButtonsSystem extends GameSystem {
@@ -16,6 +20,8 @@ public class ButtonsSystem extends GameSystem {
     private GameObject asteroids;
     private GameObject tempest;
     private GameObject battlezone;
+
+    private int active;
 
     /**
      * Konstructor for Gamesystem
@@ -37,10 +43,10 @@ public class ButtonsSystem extends GameSystem {
         }};
 
         ArrayList<Line> edges = new ArrayList<>() {{
-            add(new Line(0, 1, Color.WHITE));
-            add(new Line(1, 2, Color.WHITE));
-            add(new Line(2, 3, Color.WHITE));
-            add(new Line(3, 0, Color.WHITE));
+            add(new Line(0, 1, Color.LIGHT_GRAY));
+            add(new Line(1, 2, Color.LIGHT_GRAY));
+            add(new Line(2, 3, Color.LIGHT_GRAY));
+            add(new Line(3, 0, Color.LIGHT_GRAY));
         }};
 
         asteroids.setValue("Model2D", new Model2D(vertices, edges, 1));

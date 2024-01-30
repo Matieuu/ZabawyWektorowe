@@ -4,6 +4,9 @@ import com.motorola.engine.Game;
 import com.motorola.engine.GameObject;
 import com.motorola.engine.GameSystem;
 import com.motorola.engine.graphics.*;
+import com.motorola.engine.graphics.Line;
+import com.motorola.engine.graphics.Vector2;
+import com.motorola.engine.graphics.Vector3;
 
 import java.awt.*;
 import java.util.ArrayList;

@@ -5,6 +5,9 @@ import com.motorola.engine.GameObject;
 import com.motorola.engine.GameSystem;
 import com.motorola.engine.default_systems.Renderer2D;
 import com.motorola.engine.graphics.*;
+import com.motorola.engine.graphics.Line;
+import com.motorola.engine.graphics.Vector2;
+import com.motorola.engine.graphics.Vector3;
 import com.motorola.engine.states.State;
 
 import java.awt.*;
