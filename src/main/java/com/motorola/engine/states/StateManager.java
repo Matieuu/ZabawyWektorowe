@@ -48,13 +48,6 @@ public class StateManager {
         return states.peek();
     }
 
-    public void set(State state) {
-//        System.out.println(states.pop().getClass().getName() +" disposed");
-        states.clear();
-        states.push(state);
-        System.out.println("State changed: " + peek());
-    }
-
     public void update(double delta) {
         states.peek().stateUpdate(delta);
     }
