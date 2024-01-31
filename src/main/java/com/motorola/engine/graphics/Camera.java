@@ -20,8 +20,11 @@ import com.motorola.engine.*;
     public void setFocalLength(double focalLength) {
         this.focalLength = focalLength;
     }
-    public double getFieldOfView() {
+    public double getVerticalFieldOfView() {
         return 2*Math.atan(1.0/focalLength);
+    }
+    public void setVerticalFieldOfView(double angle) {
+        //todo
     }
 
     public GameObject getGameObject() {

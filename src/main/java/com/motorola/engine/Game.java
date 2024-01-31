@@ -13,7 +13,7 @@ import java.util.Map;
  */
 public class Game implements Runnable {
 
-    public static final int FPS_SET = 60;
+    public static final long FPS_SET = 60;
 
     private GameWindow myWindow;
     private GamePanel myPanel;
@@ -143,25 +143,25 @@ public class Game implements Runnable {
 
     @Override
     public void run() {
-        double timePerFrame = 1000000000.0 / FPS_SET;
+        double timePerFrame = 1_000_000_000.0 / FPS_SET;
 
         long previousTime = System.nanoTime();
         long lastCheck = System.currentTimeMillis();
 
         int frames = 0;
-        double deltaF = 0;
+        double delta = 0;
 
         while (true) {
             long currentTime = System.nanoTime();
 
-            deltaF += (currentTime - previousTime) / timePerFrame;
+            delta += (currentTime - previousTime); //in nanoseconds
             previousTime = currentTime;
 
-            if (deltaF >= 1) {
-                update(deltaF);
+            if (delta >= (1.0/FPS_SET)*1_000_000_000) {
+                update(delta/1_000_000_000); //in seconds
                 myPanel.repaint();
                 frames++;
-                deltaF--;
+                delta = 0;
             }
 
             if (System.currentTimeMillis() - lastCheck >= 1000) {
