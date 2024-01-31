@@ -87,6 +87,25 @@ protected List<GameObject> usedObjects;
             }
         }
     }
+
+    /**
+     * Direcly add GameObject to Array
+     * @param object
+     */
+    public void addObject(GameObject object) {
+        addToGameObjectValues(object);
+        usedObjects.add(object);
+    }
+
+    /**
+     * Direcly remove GameObject from Array
+     * @param object
+     */
+    public void deleteObject(GameObject object) {
+        usedObjects.remove(object);
+    }
+
+
     /**
      * Function active search for GameObjects with active search name that can add to system
      * //upewnic czy nie ma bledow

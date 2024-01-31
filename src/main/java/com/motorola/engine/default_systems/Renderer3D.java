@@ -12,7 +12,6 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class Renderer3D extends GameSystem {
-    private ArrayList<GameObject> objectsToRender = new ArrayList<>();
 
     private Camera camera;
     public Camera getCamera() {
@@ -31,14 +30,6 @@ public class Renderer3D extends GameSystem {
     public void addToGameObjectValues(GameObject gameObject) {
     }
 
-    public void addObject(GameObject object) {
-        objectsToRender.add(object);
-    }
-
-    public void deleteObject(GameObject object) {
-        objectsToRender.remove(object);
-    }
-
     @Override
     public void update(double delta){
 
@@ -51,7 +42,7 @@ public class Renderer3D extends GameSystem {
         Quaternion cameraInversedRotation = ((Transform)(camera.getGameObject().getValue("Transform"))).getRotation().conjugate();
         double focalLength = camera.getFocalLength();
 
-        for (GameObject obj : objectsToRender) {
+        for (GameObject obj : usedObjects) {
             Transform transform = (Transform) obj.getValue("Transform");
             Vector3 position = transform.getPosition();
             Quaternion rotation = transform.getRotation();
