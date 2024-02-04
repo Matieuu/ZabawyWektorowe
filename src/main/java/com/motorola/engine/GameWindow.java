@@ -13,7 +13,8 @@ public class GameWindow extends JFrame {
     private KeyboardEventListener kbListener;
 
     // Konstruktor
-    public GameWindow(GamePanel panel) {
+    public GameWindow(String title, GamePanel panel) {
+        super(title);
         add(panel);
         pack();
 

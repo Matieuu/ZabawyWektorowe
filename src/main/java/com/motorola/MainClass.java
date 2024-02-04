@@ -14,11 +14,9 @@ public class MainClass {
 
     /**
      * Metoda glowna
-     * @param args Argumety, ktore obecnie nie sa obslugiwane
+     * @param args Argumety, wejsciowe
      */
     public static void main(String[] args) {
-        Game game = new Game("Mickiewiczowie");
+        Game game = new Game("Mickiewiczowie", "menu");
     }
-    //możecie coś dodać żeby dało się wybrać state na start? /sg
-
 }

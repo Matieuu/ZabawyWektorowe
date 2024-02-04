@@ -25,14 +25,15 @@ public class Game implements Runnable {
     /**
      * Konstruktor
      */
-    public Game(String title) {
+    public Game(String title, String state) {
         myPanel = new GamePanel(this);
-        myWindow = new GameWindow(myPanel);
+        myWindow = new GameWindow(title, myPanel);
 
         //Inicialization Arrays
         gameSystems = new ArrayList<GameSystem>();
         gameObjects = new HashMap<String,GameObject>();
         stateManager = new StateManager(this);
+        stateManager.push(stateManager.translateStateName(state));
 
         // Start game loop
         gameThread = new Thread(this);
@@ -143,8 +144,6 @@ public class Game implements Runnable {
 
     @Override
     public void run() {
-        double timePerFrame = 1_000_000_000.0 / FPS_SET;
-
         long previousTime = System.nanoTime();
         long lastCheck = System.currentTimeMillis();
 
