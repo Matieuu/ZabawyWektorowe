@@ -7,7 +7,10 @@ public class AsteroidState extends State {
 
     public AsteroidState(Game game) {
         super(game);
+    }
 
+    @Override
+    public State load() {
         new GameObject(game,"Player");
 
         Renderer2D render = new Renderer2D(game);
@@ -15,11 +18,10 @@ public class AsteroidState extends State {
         render.addObjectsByName("Player");
         new AsteroidsSystem(game);
 
+        return this;
     }
 
     @Override
     public void update(double delta) {
-
-
     }
 }

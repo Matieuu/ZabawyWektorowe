@@ -13,7 +13,10 @@ public class ExampleState extends State {
 
     public ExampleState(Game game) {
         super(game);
+    }
 
+    @Override
+    public State load() {
         exampleSystem = new ExampleSystem(game);
         renderer = new Renderer2D(game);
 
@@ -21,6 +24,8 @@ public class ExampleState extends State {
         new GameObject(game,"Object");
 
         exampleSystem.addObjectsByName("Player");
+
+        return this;
     }
 
     @Override

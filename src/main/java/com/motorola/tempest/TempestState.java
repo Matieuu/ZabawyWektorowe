@@ -4,19 +4,21 @@ import com.motorola.engine.Game;
 import com.motorola.engine.default_systems.Renderer3D;
 import com.motorola.engine.states.State;
 
-public class TempestGameState extends State {
+public class TempestState extends State {
 
     private Renderer3D render3d;
     private LevelControlerSystem levelControlerSystem;
-    TempestGameState(Game game){
+
+    public TempestState(Game game) {
         super(game);
+    }
 
+    @Override
+    public State load() {
         render3d = new Renderer3D(game);
-
         levelControlerSystem = new LevelControlerSystem(game,render3d);
 
-
-
+        return this;
     }
 
     @Override

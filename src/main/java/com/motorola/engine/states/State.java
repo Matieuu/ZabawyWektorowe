@@ -13,7 +13,6 @@ public abstract class State {
     protected InputListener inputListener;
 
     public State(Game game) {
-        game.clearGameECS();
         this.game = game;
         inputListener = null;
     }
@@ -35,6 +34,12 @@ public abstract class State {
         }
     }
 
+    public State unload() {
+        game.clearGameECS();
+        return this;
+    }
+
+    public abstract State load();
     public abstract void update(double delta);
 
     public void setInputListener(InputListener inputListener) {
@@ -42,5 +47,8 @@ public abstract class State {
     }
     public InputListener getInputListener() {
         return inputListener;
+    }
+    public String toString() {
+        return getClass().getSimpleName();
     }
 }

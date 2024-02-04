@@ -14,10 +14,15 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class Test2DState extends State {
-    final private GameSystem renderer;
+
+    private Renderer2D renderer;
+
     public Test2DState(Game game) {
         super(game);
+    }
 
+    @Override
+    public State load() {
         renderer = new Renderer2D(game);
 
         GameObject player = new GameObject(game,"Player");
@@ -45,7 +50,10 @@ public class Test2DState extends State {
         System.out.print(player.getValue("Model2D") + "\n");
 
         ((Renderer2D) renderer).addObject(player);
+
+        return this;
     }
+
     @Override
     public void update(double delta) {
 

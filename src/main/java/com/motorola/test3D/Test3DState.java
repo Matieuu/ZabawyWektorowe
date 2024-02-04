@@ -11,11 +11,18 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class Test3DState extends State {
-    final private GameSystem renderer;
+
+    private Renderer3D renderer;
     private Camera camera;
+
+    double angle = 0;
+
     public Test3DState(Game game) {
         super(game);
+    }
 
+    @Override
+    public State load() {
         renderer = new Renderer3D(game);
 
         GameObject player = new GameObject(game,"Player");
@@ -77,8 +84,10 @@ public class Test3DState extends State {
         camera = (Camera) player.setValue("Camera", new Camera(player,0.001));
         ((Renderer3D) renderer).addObject(cube);
         ((Renderer3D) renderer).setCamera((Camera)player.getValue("Camera"));
+
+        return this;
     }
-    double angle = 0;
+
     @Override
     public void update(double delta) {
         Transform transform = ((Transform) game.getObjectsByName("Cube").get(0).getValue("Transform"));

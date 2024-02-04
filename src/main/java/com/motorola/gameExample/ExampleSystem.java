@@ -31,7 +31,7 @@ public class ExampleSystem extends GameSystem {
             double length = (double) object.getValue("length");
             object.setValue("length",length+=1);
             position.increase(new Vector2(1 + 1, 2 + 2));
-            g.setColor(Color.BLACK);
+            g.setColor(Color.WHITE);
             g.drawLine((int)position.getX(), (int)position.getY(), (int)(position.getX() + length), (int)(position.getY()+length));
         }
     }
