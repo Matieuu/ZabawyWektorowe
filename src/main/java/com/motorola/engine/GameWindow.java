@@ -5,6 +5,7 @@ import com.motorola.engine.default_systems.KeyboardEventListener;
 import javax.swing.*;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowFocusListener;
+import java.awt.event.WindowListener;
 
 public class GameWindow extends JFrame {
 
@@ -27,11 +28,28 @@ public class GameWindow extends JFrame {
 
         addWindowFocusListener(new WindowFocusListener() {
             @Override
-            public void windowGainedFocus(WindowEvent e) {
+            public void windowGainedFocus(WindowEvent e) { }
+            @Override
+            public void windowLostFocus(WindowEvent e) { }
+        });
+
+        addWindowListener(new WindowListener() {
+            @Override
+            public void windowOpened(WindowEvent e) { }
+            @Override
+            public void windowClosing(WindowEvent e) { }
+            @Override
+            public void windowClosed(WindowEvent e) {
+                panel.getGame().stopThread();
             }
             @Override
-            public void windowLostFocus(WindowEvent e) {
-            }
+            public void windowIconified(WindowEvent e) { }
+            @Override
+            public void windowDeiconified(WindowEvent e) { }
+            @Override
+            public void windowActivated(WindowEvent e) { }
+            @Override
+            public void windowDeactivated(WindowEvent e) { }
         });
 
         setVisible(true);

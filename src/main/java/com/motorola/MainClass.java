@@ -17,6 +17,6 @@ public class MainClass {
      * @param args Argumety, wejsciowe
      */
     public static void main(String[] args) {
-        Game game = new Game("Mickiewiczowie", "menu");
+        Game game = new Game("Zabawy Wektorowe", "menu");
     }
 }

@@ -22,6 +22,9 @@ public class Game implements Runnable {
 
     private Map<String,GameObject> gameObjects;
     private List<GameSystem> gameSystems;
+
+    private boolean running;
+
     /**
      * Konstruktor
      */
@@ -33,13 +36,11 @@ public class Game implements Runnable {
         gameSystems = new ArrayList<GameSystem>();
         gameObjects = new HashMap<String,GameObject>();
         stateManager = new StateManager(this);
-        stateManager.push(stateManager.translateStateName(state));
+        stateManager.push(stateManager.translateStateName(state).load());
 
         // Start game loop
         gameThread = new Thread(this);
         gameThread.start();
-
-        //Inicialization Window
     }
 
     /**
@@ -144,13 +145,14 @@ public class Game implements Runnable {
 
     @Override
     public void run() {
+        running = true;
         long previousTime = System.nanoTime();
         long lastCheck = System.currentTimeMillis();
 
         int frames = 0;
         double delta = 0;
 
-        while (true) {
+        while (running) {
             long currentTime = System.nanoTime();
 
             delta += (currentTime - previousTime); //in nanoseconds
@@ -169,6 +171,10 @@ public class Game implements Runnable {
                 frames = 0;
             }
         }
+    }
+
+    public void stopThread() {
+        running = false;
     }
 
     public GamePanel getPanel() {

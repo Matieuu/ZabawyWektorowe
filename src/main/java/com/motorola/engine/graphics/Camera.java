@@ -5,7 +5,7 @@ import com.motorola.engine.*;
 /**
  * Komponent
  */
-    public class Camera {
+public class Camera {
     private double focalLength;
     private GameObject gameObject;
     public double getFocalLength() {

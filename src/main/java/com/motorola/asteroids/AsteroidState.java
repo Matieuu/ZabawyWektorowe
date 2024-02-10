@@ -11,6 +11,7 @@ public class AsteroidState extends State {
 
     @Override
     public State load() {
+        setInputListener(new AsteroidsInput(game));
         new GameObject(game,"Player");
 
         Renderer2D render = new Renderer2D(game);

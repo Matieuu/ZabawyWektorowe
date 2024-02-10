@@ -11,7 +11,6 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class TempestState extends State {
-
     private Renderer3D render3d;
     private Model levelHolder;
     public GameObject levelObject;
@@ -25,6 +24,7 @@ public class TempestState extends State {
 
     @Override
     public State load() {
+        setInputListener(new TempestInput(game));
         render3d = new Renderer3D(game);
 
         /**
@@ -32,15 +32,15 @@ public class TempestState extends State {
          */
         ArrayList<Vector3> vertices = new ArrayList<Vector3>() {
             {
-                add(new Vector3(1, 1, 1));
+                add(new Vector3(1, 1, 100));
                 add(new Vector3(1, 1, -1));
                 add(new Vector3(-1, 1, -1));
-                add(new Vector3(-1, 1, 1));
+                add(new Vector3(-1, 1, 100));
 
-                add(new Vector3(1, -1 , 1));
+                add(new Vector3(1, -1 , 100));
                 add(new Vector3(1, -1 , -1));
                 add(new Vector3(-1, -1, -1));
-                add(new Vector3(-1, -1, 1));
+                add(new Vector3(-1, -1, 100));
             }
         };
         ArrayList<Line> edges = new ArrayList<Line>() {
@@ -63,47 +63,36 @@ public class TempestState extends State {
         };
 
         //referencja do modelu levelu
-        levelHolder = new Model(vertices, edges, 200);
+        levelHolder = new Model(vertices, edges, 10);
 
         /**
          * Model playera
          */
         ArrayList<Vector3> player_vertices = new ArrayList<Vector3>() {
             {
-                add(new Vector3(1, 1, 1));
-                add(new Vector3(1, 1, -1));
-                add(new Vector3(-1, 1, -1));
                 add(new Vector3(-1, 1, 1));
-
-                add(new Vector3(1, -1 , 1));
-                add(new Vector3(1, -1 , -1));
-                add(new Vector3(-1, -1, -1));
                 add(new Vector3(-1, -1, 1));
+                add(new Vector3(1, 1, 1));
+                add(new Vector3(1, -1, 1));
+
+                add(new Vector3(0, 0 , 2));
             }
         };
         ArrayList<Line> player_edges = new ArrayList<Line>() {
             {
                 add(new Line(0, 1, Color.GREEN));
-                add(new Line(1, 2, Color.GREEN));
+                add(new Line(3, 1, Color.GREEN));
                 add(new Line(2, 3, Color.GREEN));
-                add(new Line(3, 0, Color.GREEN));
-
-                add(new Line(4, 5, Color.GREEN));
-                add(new Line(5, 6, Color.GREEN));
-                add(new Line(6, 7, Color.GREEN));
-                add(new Line(7, 4, Color.GREEN));
+                add(new Line(0, 2, Color.GREEN));
 
                 add(new Line(0, 4, Color.GREEN));
-                add(new Line(1, 5, Color.GREEN));
-                add(new Line(2, 6, Color.GREEN));
-                add(new Line(3, 7, Color.GREEN));
+                add(new Line(1, 4, Color.GREEN));
+                add(new Line(2, 4, Color.GREEN));
+                add(new Line(3, 4, Color.GREEN));
             }
         };
 
-        playerModel = new Model(player_vertices,player_edges,10);
-
-
-
+        playerModel = new Model(player_vertices,player_edges,2);
 
 
         /**
@@ -123,7 +112,7 @@ public class TempestState extends State {
         /**
          * Set the camera to player
          */
-        cameraHolder = (Camera) player.setValue("Camera", new Camera(player,0.001));
+        cameraHolder = (Camera) player.setValue("Camera", new Camera(player,0.01));
         render3d.setCamera(cameraHolder);
 
         /**

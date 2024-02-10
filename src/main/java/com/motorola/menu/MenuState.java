@@ -12,11 +12,12 @@ public class MenuState extends State {
 
     public MenuState(Game game) {
         super(game);
-        setInputListener(new MenuInputListener(game, this));
     }
 
     @Override
     public State load() {
+        setInputListener(new MenuInput(game, this));
+
         renderer = new Renderer2D(game);
         menuButtons = new MenuButtons(game, renderer);
 

@@ -15,6 +15,7 @@ public class MenuButtons extends GameSystem {
 
     private ArrayList<GameObject> buttons;
 
+    private GameObject empty;
     private GameObject asteroids;
     private GameObject tempest;
     private GameObject battlezone;
@@ -32,10 +33,11 @@ public class MenuButtons extends GameSystem {
     public MenuButtons(Game game, Renderer2D renderer) {
         super(game);
 
-        active = 0;
+        active = 1;
         shift = game.getWindowDimension().height / 4.0;
         buttons = new ArrayList<>();
 
+        empty = new GameObject(game, "emptyObject");
         asteroids = new GameObject(game, "AsteroidButton");
         tempest = new GameObject(game, "TempestButton");
         battlezone = new GameObject(game, "BattlezoneButton");
@@ -54,28 +56,32 @@ public class MenuButtons extends GameSystem {
             add(new Line(3, 0, Color.WHITE));
         }};
 
+        empty.setValue("Model2D", new Model2D(points, edges, 1));
+        empty.setValue("Transform", new Transform(new Vector3(0, 5000, 0), Quaternion.createEulerAngles(0, 0, 0)));
+        empty.setValue("GameState", "example");
+        empty.setValue("content", "empty");
+        renderer.addObject(empty);
+        buttons.add(empty);
+
         asteroids.setValue("Model2D", new Model2D(points, edges, 1));
         asteroids.setValue("Transform", new Transform(new Vector3(0, -shift, 0), Quaternion.createEulerAngles(new Vector3(0, 0, 0))));
         asteroids.setValue("GameState", "asteroids");
+        asteroids.setValue("content", "asteroids");
+        renderer.addObject(asteroids);
+        buttons.add(asteroids);
 
         tempest.setValue("Model2D", new Model2D(points, edges, 1));
         tempest.setValue("Transform", new Transform(new Vector3(0, 0, 0), Quaternion.createEulerAngles(new Vector3(0, 0, 0))));
         tempest.setValue("GameState", "tempest");
+        tempest.setValue("content", "tempest");
+        renderer.addObject(tempest);
+        buttons.add(tempest);
 
         battlezone.setValue("Model2D", new Model2D(points, edges, 1));
         battlezone.setValue("Transform", new Transform(new Vector3(0, shift, 0), Quaternion.createEulerAngles(new Vector3(0, 0, 0))));
         battlezone.setValue("GameState", "battlezone");
-
-        asteroids.setValue("content", "asteroids");
-        tempest.setValue("content", "tempest");
         battlezone.setValue("content", "battle zone");
-
-        renderer.addObject(asteroids);
-        renderer.addObject(tempest);
         renderer.addObject(battlezone);
-
-        buttons.add(asteroids);
-        buttons.add(tempest);
         buttons.add(battlezone);
     }
 
@@ -87,11 +93,6 @@ public class MenuButtons extends GameSystem {
 
     @Override
     public void render(Graphics g) {
-        double minX = Math.min(Math.min(points.get(0).getX(), points.get(1).getX()),
-                Math.min(points.get(2).getX(), points.get(3).getX()));
-        double maxX = Math.max(Math.max(points.get(0).getX(), points.get(1).getX()),
-                Math.max(points.get(2).getX(), points.get(3).getX()));
-
         double minY = Math.min(Math.min(points.get(0).getY(), points.get(1).getY()),
                 Math.min(points.get(2).getY(), points.get(3).getY()));
         double maxY = Math.max(Math.max(points.get(0).getY(), points.get(1).getY()),
@@ -113,26 +114,17 @@ public class MenuButtons extends GameSystem {
     public void increaseActive() {
         active++;
         if (active >= buttons.size())
-            active = 0;
+            active = 1;
     }
     public void decreaseActive() {
         active--;
-        if (active < 0)
+        if (active < 1)
             active = buttons.size() - 1;
     }
 
     public void changeState() {
-        if (game.getStateManager().translateStateName((String) asteroids.getValue("GameState")) == null) return;
-        game.getStateManager().push(game.getStateManager().translateStateName((String) asteroids.getValue("GameState")));
-    }
-
-    public int getActive() {
-        return active;
-    }
-    public void setActive(int active) {
-        this.active = active;
-    }
-    public ArrayList<GameObject> getButtons() {
-        return buttons;
+        if (game.getStateManager().translateStateName((String) buttons.get(active).getValue("GameState")) == null) return;
+        game.getStateManager().push(game.getStateManager().translateStateName((String) buttons.get(active).getValue("GameState")));
+        game.getStateManager().translateStateName((String) buttons.get(active).getValue("GameState")).load();
     }
 }

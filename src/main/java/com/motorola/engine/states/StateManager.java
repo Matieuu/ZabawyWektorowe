@@ -46,7 +46,7 @@ public class StateManager {
     public void push(State state) {
         if (peek() != null)
             peek().unload();
-        states.push(state.load());
+        states.push(state);
     }
 
     /**
@@ -67,7 +67,14 @@ public class StateManager {
         return states.isEmpty() ? null : states.peek();
     }
 
+    public State set(State state) {
+        pop();
+        push(state);
+        return peek();
+    }
+
     public void update(double delta) {
+        if (peek() == null) return;
         peek().stateUpdate(delta);
     }
     public void render(Graphics g) {
