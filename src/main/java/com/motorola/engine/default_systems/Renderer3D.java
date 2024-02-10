@@ -41,7 +41,8 @@ public class Renderer3D extends GameSystem {
         Vector3 cameraInversedPosition = ((Transform)(camera.getGameObject().getValue("Transform"))).getPosition().multiply(-1);
         Quaternion cameraInversedRotation = ((Transform)(camera.getGameObject().getValue("Transform"))).getRotation().conjugate();
         double focalLength = camera.getFocalLength();
-        double screenWidth = game.getWindowDimension().width;
+        double halfScreenWidth = game.getWindowDimension().width*0.5;
+        double projectionMultiplier = camera.getProjectionMultiplier();
 
         for (GameObject obj : usedObjects) {
             Transform transform = (Transform) obj.getValue("Transform");
@@ -71,11 +72,7 @@ public class Renderer3D extends GameSystem {
                                 vertex.getX()/vertex.getZ()*focalLength,
                                 vertex.getY()/vertex.getZ()*focalLength
                         )
-                                .multiply(
-                                        1/
-                                                Math.tan(camera.getVerticalFieldOfView()/2)
-                                                /camera.getFocalLength())
-                                .multiply(screenWidth)
+                                .multiply(projectionMultiplier)
                 );
             }
 
