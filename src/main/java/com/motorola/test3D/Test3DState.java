@@ -29,7 +29,7 @@ public class Test3DState extends State {
         GameObject cube = new GameObject(game, "Cube");
 
         player.setValue("Transform", new Transform(new Vector3(0,0,0), Quaternion.createEulerAngles(0,0,0)));
-        cube.setValue("Transform", new Transform(new Vector3(0,0,5), Quaternion.createEulerAngles(0,0,0)));
+        cube.setValue("Transform", new Transform(new Vector3(0,0,2.0), Quaternion.createEulerAngles(0,0,0)));
 
         ArrayList<Vector3> vertices = new ArrayList<Vector3>() {
             {
@@ -81,7 +81,7 @@ public class Test3DState extends State {
         System.out.print("Cube model: " + cube.getValue("Model") + "\n");
 
 
-        camera = (Camera) player.setValue("Camera", new Camera(player,0.001));
+        camera = (Camera) player.setValue("Camera", new Camera(player,Math.PI/3,0.001));
         ((Renderer3D) renderer).addObject(cube);
         ((Renderer3D) renderer).setCamera((Camera)player.getValue("Camera"));
 
@@ -91,10 +91,9 @@ public class Test3DState extends State {
     @Override
     public void update(double delta) {
         Transform transform = ((Transform) game.getObjectsByName("Cube").get(0).getValue("Transform"));
-        angle += Math.PI/8;
+        angle += Math.PI/8 * delta;
         transform.setRotation(Quaternion.createEulerAngles(0,angle,0));
-        transform.setPosition(new Vector3(10,0,transform.getPosition().getZ()+1*delta));
-
-        System.out.print(transform.getRotation().getEulerAnglesRadians() + "\n");
+        //transform.setPosition(new Vector3(10,0,transform.getPosition().getZ()+1*delta));
+        //System.out.print(transform.getRotation().getEulerAnglesRadians() + "\n");
     }
 }
