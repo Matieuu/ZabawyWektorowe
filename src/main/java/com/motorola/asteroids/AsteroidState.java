@@ -15,7 +15,7 @@ public class AsteroidState extends State {
         new GameObject(game,"Player");
 
         Renderer2D render = new Renderer2D(game);
-        render.addObjectsByName("*Asteriod");
+        render.addObjectsByName("*Asteroid");
         render.addObjectsByName("Player");
         new AsteroidsSystem(game);
 
