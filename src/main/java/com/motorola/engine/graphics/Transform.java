@@ -10,6 +10,11 @@ public class Transform {
         this.position = position;
         this.rotation = rotation;
     }
+    public Transform(Vector2 position, Quaternion rotation) {
+        this.position = position.vector3();
+        this.rotation = rotation;
+    }
+
     public Quaternion getRotation() {
         return rotation;
     }
