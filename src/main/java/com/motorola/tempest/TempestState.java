@@ -24,7 +24,6 @@ public class TempestState extends State {
 
     @Override
     public State load() {
-        setInputListener(new TempestInput(game));
         render3d = new Renderer3D(game);
 
         /**
@@ -112,7 +111,7 @@ public class TempestState extends State {
         /**
          * Set the camera to player
          */
-        cameraHolder = (Camera) player.setValue("Camera", new Camera(player,0.01));
+        cameraHolder = (Camera) player.setValue("Camera", new Camera(player,0.001));
         render3d.setCamera(cameraHolder);
 
         /**
@@ -120,6 +119,11 @@ public class TempestState extends State {
          */
         render3d.addObject(player);
         render3d.addObject(levelObject);
+
+        /**
+         * add input lisener for game and player
+         */
+        setInputListener(new TempestInput(game,player));
 
         return this;
     }
