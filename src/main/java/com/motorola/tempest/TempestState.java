@@ -132,6 +132,7 @@ public class TempestState extends State {
 
     @Override
     public void update(double delta) {
+        controller.update(delta);
 
     }
 }
