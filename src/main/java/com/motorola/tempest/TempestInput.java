@@ -41,7 +41,7 @@ public class TempestInput implements InputListener {
                 pressedRight = true;
             }
             case KeyEvent.VK_LEFT, KeyEvent.VK_A -> {
-                pressedRight = false;
+                pressedLeft = true;
             }
             case KeyEvent.VK_ESCAPE -> game.getStateManager().pop();
         }
