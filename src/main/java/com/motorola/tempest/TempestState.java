@@ -17,6 +17,7 @@ public class TempestState extends State {
     public GameObject player;
     public Model playerModel;
     public Camera cameraHolder;
+    public TempestInput controller;
     public int game_try = 3;
     public TempestState(Game game) {
         super(game);
@@ -123,7 +124,8 @@ public class TempestState extends State {
         /**
          * add input lisener for game and player
          */
-        setInputListener(new TempestInput(game,player));
+        controller = new TempestInput(game,player);
+        setInputListener(controller);
 
         return this;
     }
