@@ -18,26 +18,11 @@ public class ColisionsSystem extends GameSystem {
     }
 
     @Override
-    public void addToGameObjectValues(GameObject gameObject) {
-
-    }
-
-    public void reactToColision(GameObject gameObject){
-        switch (gameObject.getName()){
-
-        }
-    }
+    public void addToGameObjectValues(GameObject gameObject) { }
 
     @Override
-    public void update(double delta) {
-        for (GameObject gameObject: usedObjects){
-
-        }
-
-    }
+    public void update(double delta) { }
 
     @Override
-    public void render(Graphics g) {
-
-    }
+    public void render(Graphics g) { }
 }

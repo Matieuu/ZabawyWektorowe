@@ -51,7 +51,7 @@ public class GameObject {
                 throw new IllegalArgumentException("KeyValue '" + valueName + "' does not exist in GameObject " + name + " With " + keyname);
             }
         } catch (IllegalArgumentException e) {
-            System.out.println("Critical Error: " + e.getMessage());
+            System.err.println("Critical Error: " + e.getMessage());
             System.exit(1);
         }
         return null;

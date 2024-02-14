@@ -9,8 +9,9 @@ import java.util.List;
  *  GameSystem
 */
 public abstract class GameSystem {
+
     protected Game game;
-protected List<GameObject> usedObjects;
+    protected List<GameObject> usedObjects;
     private List<String> activeAddObjects;
 
     /**

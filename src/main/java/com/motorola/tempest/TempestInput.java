@@ -2,17 +2,15 @@ package com.motorola.tempest;
 
 import com.motorola.engine.Game;
 import com.motorola.engine.GameObject;
-import com.motorola.engine.GameSystem;
 import com.motorola.engine.default_systems.InputListener;
 
-import java.awt.*;
 import java.awt.event.KeyEvent;
 
 public class TempestInput implements InputListener {
 
     private boolean pressedLeft;
     private boolean pressedRight;
-    private boolean relasedShoot;
+    private boolean releasedShoot;
 
     private Game game;
     private GameObject player;
@@ -20,18 +18,21 @@ public class TempestInput implements InputListener {
     public TempestInput(Game game,GameObject player) {
         this.game = game;
         this.player = player;
-        player.setValue("moveLeft",pressedLeft);
-        player.setValue("moveRight",pressedRight);
-        player.setValue("shoot",relasedShoot);
+
+        pressedLeft = false;
+        pressedRight = false;
+        releasedShoot = false;
+
+        player.setValue("moveLeft", pressedLeft);
+        player.setValue("moveRight", pressedRight);
+        player.setValue("shoot", releasedShoot);
     }
 
     public void update(double delta) {
-
-        player.setValue("moveLeft",pressedLeft);
-        player.setValue("moveRight",pressedRight);
-        player.setValue("shoot", relasedShoot);
-
-        relasedShoot = false;
+        player.setValue("moveLeft", pressedLeft);
+        player.setValue("moveRight", pressedRight);
+        player.setValue("shoot", releasedShoot);
+        releasedShoot = false;
     }
 
     @Override
@@ -57,7 +58,7 @@ public class TempestInput implements InputListener {
                 pressedLeft = false;
             }
             case KeyEvent.VK_X -> {
-                relasedShoot = true;
+                releasedShoot = true;
             }
         }
     }

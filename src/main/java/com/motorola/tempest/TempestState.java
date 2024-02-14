@@ -2,23 +2,28 @@ package com.motorola.tempest;
 
 import com.motorola.engine.Game;
 import com.motorola.engine.GameObject;
-import com.motorola.engine.GameSystem;
 import com.motorola.engine.default_systems.Renderer3D;
 import com.motorola.engine.graphics.*;
 import com.motorola.engine.states.State;
 
-import java.awt.*;
 import java.util.ArrayList;
 
 public class TempestState extends State {
+
     private Renderer3D render3d;
+    private Camera cameraHolder;
+    private TempestInput controller;
+
+    private GameObject camera;
+    private GameObject levelObject;
+    private GameObject player;
     private Model levelHolder;
-    public GameObject levelObject;
-    public GameObject player;
-    public Model playerModel;
-    public Camera cameraHolder;
-    public TempestInput controller;
-    public int game_try = 3;
+    private ArrayList<Integer> edges_to_move_for_player;//LOL
+    private Model playerModel;
+
+    private int game_try = 3;
+    private double angle = 0;
+
     public TempestState(Game game) {
         super(game);
     }
@@ -27,73 +32,8 @@ public class TempestState extends State {
     public State load() {
         render3d = new Renderer3D(game);
 
-        /**
-         * First level defined
-         */
-        ArrayList<Vector3> vertices = new ArrayList<Vector3>() {
-            {
-                add(new Vector3(1, 1, 100));
-                add(new Vector3(1, 1, -1));
-                add(new Vector3(-1, 1, -1));
-                add(new Vector3(-1, 1, 100));
-
-                add(new Vector3(1, -1 , 100));
-                add(new Vector3(1, -1 , -1));
-                add(new Vector3(-1, -1, -1));
-                add(new Vector3(-1, -1, 100));
-            }
-        };
-        ArrayList<Line> edges = new ArrayList<Line>() {
-            {
-                add(new Line(0, 1, Color.BLUE));
-                add(new Line(1, 2, Color.BLUE));
-                add(new Line(2, 3, Color.BLUE));
-                add(new Line(3, 0, Color.BLUE));
-
-                add(new Line(4, 5, Color.BLUE));
-                add(new Line(5, 6, Color.BLUE));
-                add(new Line(6, 7, Color.BLUE));
-                add(new Line(7, 4, Color.BLUE));
-
-                add(new Line(0, 4, Color.BLUE));
-                add(new Line(1, 5, Color.BLUE));
-                add(new Line(2, 6, Color.BLUE));
-                add(new Line(3, 7, Color.BLUE));
-            }
-        };
-
-        //referencja do modelu levelu
-        levelHolder = new Model(vertices, edges, 10);
-
-        /**
-         * Model playera
-         */
-        ArrayList<Vector3> player_vertices = new ArrayList<Vector3>() {
-            {
-                add(new Vector3(-1, 1, 1));
-                add(new Vector3(-1, -1, 1));
-                add(new Vector3(1, 1, 1));
-                add(new Vector3(1, -1, 1));
-
-                add(new Vector3(0, 0 , 2));
-            }
-        };
-        ArrayList<Line> player_edges = new ArrayList<Line>() {
-            {
-                add(new Line(0, 1, Color.GREEN));
-                add(new Line(3, 1, Color.GREEN));
-                add(new Line(2, 3, Color.GREEN));
-                add(new Line(0, 2, Color.GREEN));
-
-                add(new Line(0, 4, Color.GREEN));
-                add(new Line(1, 4, Color.GREEN));
-                add(new Line(2, 4, Color.GREEN));
-                add(new Line(3, 4, Color.GREEN));
-            }
-        };
-
-        playerModel = new Model(player_vertices,player_edges,2);
-
+        levelHolder = TempestModel.getOldLevelModel(10);
+        playerModel = TempestModel.getPlayerMode(2);
 
         /**
          *  make level object
@@ -107,12 +47,14 @@ public class TempestState extends State {
          */
         player = new GameObject(game,"Player");
         player.setValue("Model", playerModel);
-        player.setValue("Transform", new Transform(new Vector3(0,0,0), Quaternion.createEulerAngles(0,0,0)));
+        player.setValue("Transform", new Transform(new Vector3(0,0,1), Quaternion.createEulerAngles(0,0,0)));
 
         /**
          * Set the camera to player
          */
-        cameraHolder = (Camera) player.setValue("Camera", new Camera(player,0.001));
+        camera = new GameObject(game,"CameraHolder");
+        camera.setValue("Transform", new Transform(new Vector3(0,0,-10), Quaternion.createEulerAngles(0,0,0)));
+        cameraHolder = new Camera(camera,0.1);
         render3d.setCamera(cameraHolder);
 
         /**
@@ -132,7 +74,22 @@ public class TempestState extends State {
 
     @Override
     public void update(double delta) {
-        controller.update(delta);
+        if (controller == null) return;
 
+        controller.update(delta);
+        Transform transform = (Transform) player.getValue("Transform");
+
+        if ((boolean) player.getValue("moveLeft")) {
+            angle -= Math.PI/8 * delta;
+            transform.setRotation(Quaternion.createEulerAngles(0, angle, 0));
+        }
+
+        if ((boolean) player.getValue("moveRight")) {
+            angle += Math.PI/8 * delta;
+            transform.setRotation(Quaternion.createEulerAngles(0, angle, 0));
+        }
+
+        if (angle > 2*Math.PI) angle -= 2*Math.PI;
+        if (angle < 0) angle += 2*Math.PI;
     }
 }
