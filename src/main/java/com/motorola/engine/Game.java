@@ -49,6 +49,9 @@ public class Game implements Runnable {
     public void addGameSystem(GameSystem gameSystem){
         gameSystems.add(gameSystem);
     }
+    public void removeGameSystem(GameSystem gameSystem) {
+        gameSystems.remove(gameSystem);
+    }
 
     /**
      * Adds GameObject to hashmap
