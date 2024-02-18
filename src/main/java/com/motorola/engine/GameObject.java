@@ -52,7 +52,7 @@ public class GameObject {
             }
         } catch (IllegalArgumentException e) {
             System.err.println("Critical Error: " + e.getMessage());
-            System.exit(1);
+//            System.exit(1);
         }
         return null;
     }

@@ -16,6 +16,7 @@ public class PlayerSystem extends GameSystem {
 
     private long shootDelay;
     private long lastShot;
+    private double rotation;
 
     /**
      * Konstructor for Gamesystem
@@ -37,23 +38,11 @@ public class PlayerSystem extends GameSystem {
     private void onMoveBackward() { }
 
     private void onMoveLeft() {
-        Transform transform = (Transform) player.getValue("Transform");
-        transform.setRotation(Quaternion.createEulerAngles(
-                transform.getRotation().getX(),
-                transform.getRotation().getY(),
-                transform.getRotation().getZ() + Math.PI/180
-        ));
-        player.setValue("Transform", transform);
+        rotation += Math.PI/180;
     }
 
     private void onMoveRight() {
-        Transform transform = (Transform) player.getValue("Transform");
-        transform.setRotation(Quaternion.createEulerAngles(
-                transform.getRotation().getX(),
-                transform.getRotation().getY(),
-                transform.getRotation().getZ() - Math.PI/180
-        ));
-        player.setValue("Transform", transform);
+        rotation -= Math.PI/180;
     }
 
     private void onShoot() {
@@ -80,6 +69,15 @@ public class PlayerSystem extends GameSystem {
             onMoveRight();
         if ((boolean) player.getValue("shoot"))
             onShoot();
+
+        Transform transform = (Transform) player.getValue("Transform");
+        transform.rotate(rotation);
+        player.setValue("Transform", transform);
+
+        if (rotation >= 2*Math.PI)
+            rotation -= 2*Math.PI;
+        if (rotation <= -2*Math.PI)
+            rotation += 2*Math.PI;
     }
 
     public void createPlayer(int scale) {

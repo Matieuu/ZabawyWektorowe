@@ -35,11 +35,6 @@ public class AsteroidsInput implements InputListener {
     }
 
     public void update(double delta) {
-        player.setValue("moveForward", pressedForward);
-        player.setValue("moveBackward", pressedBackward);
-        player.setValue("moveLeft", pressedLeft);
-        player.setValue("moveRight", pressedRight);
-        player.setValue("shoot", pressedShoot);
     }
 
     @Override
@@ -52,6 +47,12 @@ public class AsteroidsInput implements InputListener {
             case KeyEvent.VK_X -> pressedShoot = true;
             case KeyEvent.VK_ESCAPE -> game.getStateManager().pop();
         }
+
+        player.setValue("moveForward", pressedForward);
+        player.setValue("moveBackward", pressedBackward);
+        player.setValue("moveLeft", pressedLeft);
+        player.setValue("moveRight", pressedRight);
+        player.setValue("shoot", pressedShoot);
     }
 
     @Override
@@ -63,5 +64,11 @@ public class AsteroidsInput implements InputListener {
             case KeyEvent.VK_DOWN, KeyEvent.VK_S -> pressedBackward = true;
             case KeyEvent.VK_X -> pressedShoot = false;
         }
+
+        player.setValue("moveForward", pressedForward);
+        player.setValue("moveBackward", pressedBackward);
+        player.setValue("moveLeft", pressedLeft);
+        player.setValue("moveRight", pressedRight);
+        player.setValue("shoot", pressedShoot);
     }
 }
